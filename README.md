@@ -1,8 +1,8 @@
-# Your startup name here
+# What's in my pantry
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+The purpose of this application is to help my wife and I know what we have in our pantry (and fridge) at all times regardless of whether we're at home or not. It will have a list of all of the food in our house as well as the quantities of each. I will be able to keep track of how much food I'll have, and the quanitity will change when either my wife or I use some of the food. 
 
 
 > [!NOTE]
@@ -26,7 +26,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Have you ever been at the store and seen something that wasn't on your list and said to yourself "dang it! I can't remember if I have this in my pantry or not". You don't think you have it so you buy it, go home, and find you already had 9 containers off-brand sour cream and you just bought a tenth? Well, no more sour cream surprises any more! "What's in my pantry' will keep track of all the food in your house and keep track of how the quantities shift when you buy more or use some of it. 
 
 ### Design
 
