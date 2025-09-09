@@ -1,15 +1,6 @@
 # What's in my pantry
 
-[My Notes](notes.md)
-
 The purpose of this application is to help my wife and I know what we have in our pantry (and fridge) at all times regardless of whether we're at home or not. It will have a list of all of the food in our house as well as the quantities of each. I will be able to keep track of how much food I'll have, and the quanitity will change when either my wife or I use some of the food. 
-
-
-> [!NOTE]
->  This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
-
-> [!NOTE]
->  If you are not familiar with Markdown then you should review the [documentation](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax) before continuing.
 
 ## 🚀 Specification Deliverable
 
@@ -19,14 +10,14 @@ The purpose of this application is to help my wife and I know what we have in ou
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
 - [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
+- [x] A concise and compelling elevator pitch
 - [ ] Description of key features
 - [ ] Description of how you will use each technology
 - [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ### Elevator pitch
 
-Have you ever been at the store and seen something that wasn't on your list and said to yourself "dang it! I can't remember if I have this in my pantry or not". You don't think you have it so you buy it, go home, and find you already had 9 containers off-brand sour cream and you just bought a tenth? Well, no more sour cream surprises any more! "What's in my pantry' will keep track of all the food in your house and keep track of how the quantities shift when you buy more or use some of it. 
+Have you ever been at the store and seen something that wasn't on your list and said to yourself "dang it! I can't remember if I have this in my pantry or not". You don't think you have it so you buy it, go home, and find you already had 9 containers off-brand sour cream and you just bought a tenth? Well, no more sour cream surprises! "What's in my pantry' will keep track of all the food in your house and keep track of how the quantities adjust when you buy more or use some of it. 
 
 ### Design
 
@@ -43,20 +34,23 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure login
+- Ability to add yourself to multiple pantrys (home, work, grandma's, etc.)
+- Ability to add and delete quantity of food
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - I will use HTML to correctly display pages and information. 2 HTML pages, one for login, one for list of active pantrys and adding/deleting food from pantrys.
+- **CSS** - My CSS will have good colors, spacing, and styling.
+- **React** - React will provide a login and also update the webpage efficiently when food is added/deleted, instead of reloading the entire webpage.
+- **Service** - Will have backend Service endpoints for:
+   - login
+   - creating/adding/removing yourself from a pantry
+   - adding/deleting food and food quantities
+- **DB/Login** - register/login users stored in Database. Keeps track of what pantrys you're a part of. Cannot view/edit a pantry if you aren't part of it. Login credentials stored securely in database.
+- **WebSocket** - When one person makes a change to the pantry, it is broadcast to everyone else who is a part of that pantry. 
 
 ## 🚀 AWS deliverable
 
