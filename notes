@@ -1,0 +1,3 @@
+Notes for things I need to remember:
+My server's IP adderess: http://23.21.13.97
+Command to ssh into my server: ssh -i production.pem ubuntu@23.21.13.97
