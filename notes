@@ -1,3 +1,4 @@
 Notes for things I need to remember:
 My server's IP adderess: http://52.20.26.228
 Command to ssh into my server: ssh -i production.pem ubuntu@23.21.13.97
+when you type `*` in the value of the subdomain, it is a wildcard that allows any prefix to be included as a subdomain so you don't have to list them manually
