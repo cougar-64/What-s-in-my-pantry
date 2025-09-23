@@ -1,51 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>What's in my Pantry</title>
-    </head>
-    <body>
-        <header>
-            <h1>What's in my Pantry</h1>
-            <nav>
-                <menu>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="pantrys.html">My Pantrys</a></li>
-                    <li><a href="feedback.html">Submit feedback!</a></li>
-                    <li><a href="about.html">About</a></li>
-                </menu>
-            </nav>
+   <head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>What's in my Pantry</title>
+   </head>
+   <body>
+      <header>
+         <h1>What's in my Pantry</h1>
+         <nav>
+            <menu>
+               <li><a href="index.html">Home</a></li>
+               <li><a href="pantrys.html">My Pantrys</a></li>
+               <li><a href="feedback.html">Submit feedback!</a></li>
+               <li><a href="about.html">About</a></li>
+            </menu>
+         </nav>
 
-            <hr />
-        </header>
-        <main>
-            <div class="users">
-                User:
-                <span class="user">Username from Database</span>
-            </div>
-            <ul class="notification">
-                <li class="player-name">Websocket Notification</li>
-                <li class="player-name">Websocket Notification</li>
-                <li class="player-name">Websocket Notification</li>
-              </ul>
-
-              <br />
-
-            <h1>Active pantrys: </h1>
-            <ul class="pantrys">
-                <li class="my-pantrys">Load from database</li>
-                <li><a href="specificPantry.html">Each pantry will link to this html page</a></li>
+         <hr />
+      </header>
+      <main>
+         <div class="users">
+            User:
+            <span class="user">Username from Database</span>
+         </div>
+         <ul class="notification">
+            <li class="player-name">Websocket Notification - Johnny created a new pantry</li>
+            <li class="player-name">Websocket Notification - Lisa joined 'Work' pantry</li>
+            <li class="player-name">Websocket Notification - Wifey subtracted pasta from 'Home' pantry</li>
             </ul>
-            </main>
 
-
-        <footer>
-            <button type="submit">Logout</button>
-            <hr />
-            <span class="author_name">Samuel Bird</span>
             <br />
-            <a href="https://github.com/cougar-64/What-s-in-my-pantry">Github</a>
-        </footer>
-    </body>
+
+         <h1>Active pantrys: </h1>
+         <ul class="pantrys">
+            <li class="my-pantrys">Load from database with unique 4 digit ID</li>
+            <li><a href="specificPantry.html">Each pantry will link to this html page</a></li>
+            <button class="find-existing-pantry">Find existing pantry</button>
+            <button class="add-new-pantry">Create a new pantry</button>
+         </ul>
+         </main>
+
+
+      <footer>
+         <button type="submit">Logout</button>
+         <hr />
+         <span class="author_name">Samuel Bird</span>
+         <br />
+         <a href="https://github.com/cougar-64/What-s-in-my-pantry">Github</a>
+      </footer>
+   </body>
 </html>
