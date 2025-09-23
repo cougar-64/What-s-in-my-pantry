@@ -61,9 +61,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [x] **HTML pages** - I created 5 html pages for my project.
 - [x] **Proper HTML element usage** - I used HEADER, FOOTER, BODY, MAIN, etc.
 - [x] **Links** - All of the buttens will go to the pages they're supposed to through links
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
+- [x] **Text** - There is lots of text on all of my pages
+- [x] **3rd party API placeholder** - I specified I want zoo amimal pictures API on my about.html page
+- [x] **Images** - There is a photo of a bison (that I took!) at the bottom of each page by my name
 - [x] **Login placeholder** - Login has placeholders including username and password
 - [x] **DB data placeholder** - There are multiple places on my pages that say I will be loading data from my databse
 - [x] **WebSocket placeholder** - There are multiple places on my pages that say where I will be loading websocket notifications
