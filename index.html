@@ -5,15 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>What's in my Pantry</title>
 </head>
-    <header>
-        <h1>What's in my Pantry</h1>
-        <nav>
-            <menu>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="pantrys.html">My Pantrys</a></li>
-                <li><a href="feedback.html">Submit feedback!</a></li>
-                <li><a href="about.html">About</a></li>
-            </menu>
-        </nav>
-    </header>
+    <body>
+        <header>
+            <h1>What's in my Pantry</h1>
+            <nav>
+                <menu>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="pantrys.html">My Pantrys</a></li>
+                    <li><a href="feedback.html">Submit feedback!</a></li>
+                    <li><a href="about.html">About</a></li>
+                </menu>
+            </nav>
+
+            <hr />
+        </header>
+
+        <main>
+            <h1>Welcome! Please login to get started, or create an account</h1>
+            <form method="get" action="pantrys.html">
+                <div>
+                    <span>Email</span>
+                    <input type="text" placeholder="email@email.com" />
+
+                </div>
+                <div>
+                    <span>Password</span>
+                    <input type="password" placeholder="********" />
+                </div>
+                <button type="submit">Login</button>
+                <button type="l">Create Account</button>
+            </form>
+        </main>
+
+        <footer>
+            <hr />
+            <span class="author_name">Samuel Bird</span>
+            <br />
+            <a href="https://github.com/cougar-64/What-s-in-my-pantry">Github</a>
+        </footer>
+    </body>
 </html>
