@@ -52,21 +52,21 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
+- [x] **Server deployed and accessible with custom domain name** - [My server link](https://yourdomainnamehere.click).
 
 ## 🚀 HTML deliverable
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
+- [x] **HTML pages** - I created 5 html pages for my project.
+- [x] **Proper HTML element usage** - I used HEADER, FOOTER, BODY, MAIN, etc.
+- [x] **Links** - All of the buttens will go to the pages they're supposed to through links
 - [ ] **Text** - I did not complete this part of the deliverable.
 - [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
 - [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [x] **Login placeholder** - Login has placeholders including username and password
+- [x] **DB data placeholder** - There are multiple places on my pages that say I will be loading data from my databse
+- [x] **WebSocket placeholder** - There are multiple places on my pages that say where I will be loading websocket notifications
 
 ## 🚀 CSS deliverable
 
