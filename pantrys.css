@@ -47,11 +47,7 @@ main {
    text-align: center;
    background: hsla(205, 13%, 50%, 0.82);
    flex-direction: column;
-}
-
-ul.notification {
-   padding-right: 50px;
-   text-align: end;
+   padding-top: 50px;
 }
 
 main ul li {
@@ -63,9 +59,9 @@ main ul li {
 
 
 
+
 footer {
    display: flex;
-   text-align: center;
    align-items: center;
    justify-content: center;
    gap: 30px;
@@ -75,5 +71,4 @@ footer {
 
 footer a {
    color: black;
-
 }
