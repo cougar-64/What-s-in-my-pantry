@@ -1,0 +1,24 @@
+body {
+   display: flex;
+   flex-direction: column;
+   margin: 0;
+   height: 100vh;
+   text-align: center;
+   font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+   flex: 0 80px;
+   background: hsl(111 20.5% 60% / 0.88);
+}
+ 
+footer {
+   flex: 0 30px;
+   background: hsl(111 20.5% 60% / 0.88);
+}
+ 
+main {
+   flex: 1;
+   display: flex;
+   flex-direction: row;
+}
