@@ -18,7 +18,6 @@ header {
    background: hsla(206, 30%, 45%, 0.88);
    height: 50px;
    font-size: small;
-   list-style: none;
 }
 
 menu {
@@ -45,17 +44,17 @@ menu li a:hover {
 
 
 main {
-   padding-top: 100px;
+   padding-top: 200px;
    flex: 1;
    display: flex;
-   flex-direction: row;
    text-align: center;
-   justify-content: center;
    background: hsla(205, 13%, 50%, 0.82);
+   flex-direction: column;
 }
 
-
-
+main form button:hover {
+   background: rgb(72, 139, 246)
+}
 
 
 
