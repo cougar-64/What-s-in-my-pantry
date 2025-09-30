@@ -56,6 +56,12 @@ main form button:hover {
    background: rgb(72, 139, 246)
 }
 
+main ul {
+   list-style: none;
+}
+
+
+
 
 
  

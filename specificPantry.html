@@ -26,13 +26,18 @@
             <span class="pantry-members">Pantry members: - load from database</span>
             <ul>
                 <li class="Pantry-item">load items from database</li>
-                <li class="example-item">Pasta 10 - / +</li>
-                <button type="add/subtract">add more of item</button>
-                <button type="add/subtract">subtract from item (if 0, offer to delete)</button>
-                <button type="leave-pantry">Leave pantry</button>
-                <button type="delete-pantry">Delete pantry - only shows up if they are the 
-                    creator of that pantry
-                </button>
+                <li class="example-item">Pasta 10 
+                    <span id="decrease" style="cursor: pointer; user-select: none;">-</span> /
+                    <span id="increase" style="cursor: pointer; user-select: none;">+</span>
+                </li>
+                <a href="pantrys.html">
+                    <button type="leave-pantry">Leave Pantry</button>
+                </a>
+                <a href="pantrys.html">
+                    <button type="delete-pantry">Delete pantry - only shows up if they are the 
+                        creator of that pantry
+                    </button>
+                </a>
             </ul>
             <a href="index.html">
                 <button type="submit">Logout</button>
