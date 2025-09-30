@@ -72,12 +72,12 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Header, footer, and main content body** - I did not complete this part of the deliverable.
-- [ ] **Navigation elements** - I did not complete this part of the deliverable.
-- [ ] **Responsive to window resizing** - I did not complete this part of the deliverable.
-- [ ] **Application elements** - I did not complete this part of the deliverable.
-- [ ] **Application text content** - I did not complete this part of the deliverable.
-- [ ] **Application images** - I did not complete this part of the deliverable.
+- [x] **Header, footer, and main content body** - Headers and footers changed dramatically with layout, color, and links.
+- [x] **Navigation elements** - Menu options have nice navigations that look nice too.
+- [x] **Responsive to window resizing** - Pages are responsive to window resizings.
+- [x] **Application elements** - There are lots of application elements that include body style changing of boldness, font size, and buttons, etc.
+- [x] **Application text content** - All content of the text was changed in one way or another, looking much nicer now. 
+- [x] **Application images** - Image tag CSS added to not overflow the page.
 
 ## 🚀 React part 1: Routing deliverable
 
