@@ -1,24 +1,41 @@
 import React from 'react';
 import './app.css';
 
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { About } from './about/about';
+import { Feedback } from './feedback/feedback';
+import { Pantrys } from './pantrys/pantrys';
+import { NewPantry } from './newPantry/newPantry';
+import { SpecificPantry } from './specificPantry/specificPantry';
+import { Container } from 'react-bootstrap';
+
 export default function App() {
-   return <div className='app bg-dark text-light'>
+   return (
+   <BrowserRouter>
+   <div className='app bg-dark text-light'>
       <header className="navbar">
          <h1>What's in my Pantry</h1>
          <nav>
             <menu>
-               <li><a href="index.html">Home</a></li>
-               <li><a href="pantrys.html">My Pantrys</a></li>
-               <li><a href="feedback.html">Submit Feedback!</a></li>
-               <li><a href="about.html">About</a></li>
+               <li><NavLink to="/">Home</NavLink></li>
+               <li><NavLink to="pantrys">My Pantrys</NavLink></li>
+               <li><NavLink to="feedback">Submit Feedback!</NavLink></li>
+               <li><NavLink to="about">About</NavLink></li>
             </menu>
          </nav>
 
       </header>
 
-      <main>
-         App components go here
-      </main>
+      <Routes>
+         <Route path='/' element={<Login />} exact />
+         <Route path='/about' element={<About />} />
+         <Route path='/feedback' element={<Feedback />} />
+         <Route path='/newPantry' element={<NewPantry />} />
+         <Route path='/pantrys' element={<Pantrys />} />
+         <Route path='/specificPantry' element={<SpecificPantry />} />
+         <Route path='*' element={<NotFound />} />
+      </Routes>
 
       <footer>
          <span className="author_name">Samuel Bird</span>
@@ -27,4 +44,11 @@ export default function App() {
          <a href="https://github.com/cougar-64/What-s-in-my-pantry">Github</a>
       </footer>
    </div>
+   </BrowserRouter>
+   );
+}
+
+
+function NotFound() {
+   return <main className='container-fluid bg-secondary text-center'>404: I don't know what you're trying to do</main>
 }
