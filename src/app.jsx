@@ -38,7 +38,7 @@ export default function App() {
 
       <footer>
          <span className="author_name">Samuel Bird</span>
-         <img src="test2.jpg" width="100" height="75" />
+         <img src="/test2.jpg" width="100" height="75" />
          <br />
          <a href="https://github.com/cougar-64/What-s-in-my-pantry">Github</a>
       </footer>

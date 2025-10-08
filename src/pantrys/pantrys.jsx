@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav, NavLink } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 export function Pantrys() {
    return (
@@ -18,11 +18,13 @@ export function Pantrys() {
       <ul className="pantrys">
          <li className="my-pantrys">Load from database with unique 4 digit ID</li>
          <li><NavLink to="specificPantry">Each pantry will link to this html page</NavLink></li>
+         <li>
          <NavLink to="/newPantry">
             <button className="add-new-pantry" type="button">Create a new pantry</button>
           </NavLink>
+          </li>
       </ul>
-      <NavLink to="index.">
+      <NavLink to="index">
          <button class="logout" type="submit">Logout</button>
       </NavLink>
       </main>
