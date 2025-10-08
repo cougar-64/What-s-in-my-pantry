@@ -4,19 +4,14 @@
   "description": "The purpose of this application is to help my wife and I know what we have in our pantry (and fridge) at all times regardless of whether we're at home or not. It will have a list of all of the food in our house as well as the quantities of each. I will be able to keep track of how much food I'll have, and the quanitity will change when either my wife or I use some of the food.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/cougar-64/What-s-in-my-pantry.git"
-  },
+
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/cougar-64/What-s-in-my-pantry/issues"
-  },
-  "homepage": "https://github.com/cougar-64/What-s-in-my-pantry#readme",
   "devDependencies": {
     "vite": "^7.1.9"
   }
