@@ -3,9 +3,6 @@ import { NavLink } from 'react-router-dom';
 
 export function SpecificPantry() {
    const [pantryName, setPantryName] = useState('default');
-   // useEffect(()=>{
-   //    if (localStorage.getItem(pantryName))
-   // }) 
    return (
       <main>
          <h1>Welcome to {pantryName} </h1>
@@ -26,16 +23,16 @@ export function SpecificPantry() {
                >+</span>
 
                </li>
-               <NavLink to="pantrys">
+               <NavLink to="/pantrys">
                   <button type="leave-pantry">Leave Pantry</button>
                </NavLink>
-               <a href="pantrys.html">
+               <NavLink to="/pantrys">
                   <button type="delete-pantry">Delete pantry - only shows up if they are the 
                      creator of that pantry
                   </button>
-               </a>
+               </NavLink>
          </ul>
-         <NavLink to="index">
+         <NavLink to="/">
                <button type="submit">Logout</button>
             </NavLink>
       </main>
