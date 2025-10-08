@@ -83,9 +83,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Bundled using Vite** - I did not complete this part of the deliverable.
-- [ ] **Components** - I did not complete this part of the deliverable.
-- [ ] **Router** - I did not complete this part of the deliverable.
+- [x] **Bundled using Vite** - I followed Dr. Lee's video and my program bundles using vite.
+- [x] **Components** - .jsx files were created for every one of my html pages.
+- [x] **Router** - All of my pages move flawlessly without reloading html pages due to vite.
 
 ## 🚀 React part 2: Reactivity deliverable
 
