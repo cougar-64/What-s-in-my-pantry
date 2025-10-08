@@ -1,7 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 
 export function NewPantry() {
+   const handleSubmit = async (event) => {
+      event.preventDefault();
+      window.location.href="/specificPantry";
+      localStorage.setItem((pantryName), pantryName)
+   }
    return (
       <main>
          <h1 className="users">
@@ -15,13 +19,9 @@ export function NewPantry() {
             <br />
 
          <h1>New Pantry Name: </h1>
-         <form action="specificPantry.html" method="get">
+         <form onSubmit={handleSubmit}>
             <input type="text" name="pantryName" />
-            <li>
-            <NavLink to='/pantrys'>
             <button type="submit">Submit</button>
-            </NavLink>
-            </li>
           </form>
       </main>
    );
