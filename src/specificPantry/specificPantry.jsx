@@ -23,14 +23,16 @@ export function SpecificPantry() {
                >+</span>
 
                </li>
+               <li>
                <NavLink to="/pantrys">
-                  <button type="leave-pantry">Leave Pantry</button>
+                  <button type="button">Leave Pantry</button>
                </NavLink>
                <NavLink to="/pantrys">
-                  <button type="delete-pantry">Delete pantry - only shows up if they are the 
+                  <button type="button">Delete pantry - only shows up if they are the 
                      creator of that pantry
                   </button>
                </NavLink>
+               </li>
          </ul>
          <NavLink to="/">
                <button type="submit">Logout</button>

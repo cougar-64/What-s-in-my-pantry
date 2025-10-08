@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import './pantrys.css';
 
 export function Pantrys() {
    return (
@@ -24,7 +25,7 @@ export function Pantrys() {
           </NavLink>
           </li>
       </ul>
-      <NavLink to="index">
+      <NavLink to="/">
          <button class="logout" type="submit">Logout</button>
       </NavLink>
       </main>
