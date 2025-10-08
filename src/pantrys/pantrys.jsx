@@ -17,7 +17,7 @@ export function Pantrys() {
       <h1>Active pantrys: </h1>
       <ul className="pantrys">
          <li className="my-pantrys">Load from database with unique 4 digit ID</li>
-         <li><NavLink to="specificPantry">Each pantry will link to this html page</NavLink></li>
+         <li><NavLink to="/specificPantry">Each pantry will link to this html page</NavLink></li>
          <li>
          <NavLink to="/newPantry">
             <button className="add-new-pantry" type="button">Create a new pantry</button>
