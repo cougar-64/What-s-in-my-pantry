@@ -8,7 +8,6 @@ import { Feedback } from './feedback/feedback';
 import { Pantrys } from './pantrys/pantrys';
 import { NewPantry } from './newPantry/newPantry';
 import { SpecificPantry } from './specificPantry/specificPantry';
-import { Container } from 'react-bootstrap';
 
 export default function App() {
    return (

@@ -20,7 +20,7 @@ header {
    display: flex;
    align-items: center;
    gap: 30px;
-   flex: 0 80px;
+   height: 0 80px;
    background: hsla(206, 30%, 45%, 0.88);
    height: 50px;
    font-size: small;
@@ -50,7 +50,7 @@ menu li a:hover {
 
 
 main {
-   padding-top: 200px;
+   padding-top: 00px;
    flex: 1;
    display: flex;
    text-align: center;
