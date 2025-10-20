@@ -13,7 +13,7 @@ export function Login() {
             </div>
             <div>
                <span>Password</span>
-               <input type="password" placeholder="********" />
+               <input type="password" plaeholder="********" />
             </div>
             <li>
                <NavLink to='/pantrys'><button type="button">Login</button></NavLink>

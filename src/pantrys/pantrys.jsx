@@ -26,7 +26,7 @@ export function Pantrys() {
           </li>
       </ul>
       <NavLink to="/">
-         <button class="logout" type="submit">Logout</button>
+         <button className="logout" type="submit">Logout</button>
       </NavLink>
       </main>
    )

@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function SpecificPantry() {
+   function addItem() {
+      console.log("added");
+   }
    const [pantryName, setPantryName] = useState('default');
    return (
       <main>
@@ -11,19 +14,24 @@ export function SpecificPantry() {
          <span className="pantry-members">Pantry members: - load from database</span>
          <ul>
                <li className="Pantry-item">load items from database</li>
-               <li className="example-item">Pasta 10 
+               <li className="example-item">Pasta 
                <span 
                   id="decrease" 
                   style={{ cursor: "pointer", userSelect: "none" }}
-               >-</span>
-
+               > - </span>
+               10
                <span 
                   id="increase" 
                   style={{ cursor: "pointer", userSelect: "none" }}
-               >+</span>
+               > +</span>
 
                </li>
                <li>
+            <div>
+               <input type="text" placeholder="item type" size="7" />
+               <input type="text" placeholder="quantity" size="6" />
+               <button onClick={addItem}>add</button>
+            </div>
                <NavLink to="/pantrys">
                   <button type="button">Leave Pantry</button>
                </NavLink>
