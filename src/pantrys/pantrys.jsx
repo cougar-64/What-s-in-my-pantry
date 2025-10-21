@@ -3,7 +3,13 @@ import { NavLink } from 'react-router-dom';
 import './pantrys.css';
 
 export function Pantrys() {
-   const [user, setUser] = React.useState(localStorage.getItem('user') || null);
+   const [user, setUser] = React.useState(null);
+   React.useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+         setUser(storedUser);
+   }
+   }, []);
    const activePantrys = user?.pantrys || [];
    return (
       <main>

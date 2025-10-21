@@ -1,16 +1,23 @@
 import React from 'react';
 
 export function NewPantry() {
+   const [user, setUser] = React.useState(null);
+   React.useEffect(() => {
+      const storedUser = localStorage.getItem('user');
+      if (storedUser) {
+         setUser(storedUser);
+      }
+   }, []);
    const handleSubmit = async (event) => {
       event.preventDefault();
       const pantryName = event.target.pantryName.value;
       window.location.href="/specificPantry";
-      localStorage.setItem((pantryName), pantryName)
+      localStorage.setItem('currentPantry', pantryName);
    }
    return (
       <main>
-         <h1 className="users">
-            User: Username from Database</h1>
+      <h1 className="users">
+         User: {user}</h1>
          <ul className="notification">
             <li className="player-name">Websocket Notification - Johnny created a new pantry</li>
             <li className="player-name">Websocket Notification - Lisa joined 'Work' pantry</li>

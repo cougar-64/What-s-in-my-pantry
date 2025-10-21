@@ -2,10 +2,26 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function SpecificPantry() {
+   const [newItem, setNewItem] = React.useState('');
+   const [newQuantity, setnewQuantity] = React.useState('');
+   const [items, setItems] = React.useState([]);
+   React.useEffect(() => {
+      const currentPantry = localStorage.getItem('currentPantry');
+      const storedItems =JSON.parse(localStorage.getItem(`pantryItems_${currentPantry}`)) || [];
+      setItems(storedItems);
+   }, []);
    function addItem() {
-      console.log("added");
+      const updatedItems = [
+         ...items,
+         { name: newItem, quantity: newQuantity }
+      ];
+      setItems(updatedItems);
+      localStorage.setItem(
+        `pantryItems_${currentPantry}`,
+        JSON.stringify(updatedItems)
+      );
    }
-   const [pantryName, setPantryName] = useState('default');
+   const [pantryName, setPantryName] = React.useState(localStorage.getItem('currentPantry' || 'default'));
    return (
       <main>
          <h1>Welcome to {pantryName} </h1>
@@ -26,10 +42,11 @@ export function SpecificPantry() {
                > +</span>
 
                </li>
+         </ul>
                <li>
             <div>
-               <input type="text" placeholder="item type" size="7" />
-               <input type="text" placeholder="quantity" size="6" />
+               <input value={newItem} type="text" placeholder="item type" size="7" onChange={(e) => setNewItem(e.target.value)}/>
+               <input value={newQuantity} type="text" placeholder="quantity" size="6" onChange={(e) => setnewQuantity(e.target.value)}/>
                <button onClick={addItem}>add</button>
             </div>
                <NavLink to="/pantrys">
@@ -41,7 +58,6 @@ export function SpecificPantry() {
                   </button>
                </NavLink>
                </li>
-         </ul>
          <NavLink to="/">
                <button type="submit">Logout</button>
             </NavLink>
