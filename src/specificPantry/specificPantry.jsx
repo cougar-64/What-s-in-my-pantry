@@ -19,6 +19,24 @@ export function SpecificPantry() {
       setCurrentPantry(updatedPantry);
       localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
    }
+
+   function increaseItem(index) {
+      const updatedItems = [...currentPantry.items];
+      updatedItems[index].quantity = Number(updatedItems[index].quantity) + 1;
+      setCurrentPantry({...currentPantry, items: updatedItems});
+   }
+   function decreaseItem(index) {
+      const updatedItems = [...currentPantry.items];
+      if (updatedItems[index].quantity > 1) {
+         updatedItems[index].quantity = Number(updatedItems[index].quantity) - 1;
+      }
+      else {
+         updatedItems.splice(index, 1);
+      }
+      setCurrentPantry({...currentPantry, items: updatedItems});
+      
+   }
+
    if (!currentPantry) return <div>Loading pantry...</div>;
 
 
@@ -29,19 +47,13 @@ export function SpecificPantry() {
          <span className="pantry-creator">Pantry creator: {currentPantry.creator}</span>
          <span className="pantry-members">Pantry members: {currentPantry.members}</span>
          <ul>
-               <li className="Pantry-item">load items from database</li>
-               <li className="example-item">Pasta 
-               <span 
-                  id="decrease" 
-                  style={{ cursor: "pointer", userSelect: "none" }}
-               > - </span>
-               10
-               <span 
-                  id="increase" 
-                  style={{ cursor: "pointer", userSelect: "none" }}
-               > +</span>
-
-               </li>
+            {currentPantry.items.map((item, index) => (
+            <li key={index} className="Pantry-item">
+               {item.name}: 
+               <span onClick={() => decreaseItem(index)}>-</span>{item.quantity}
+               <span onClick={() => increaseItem(index)}>+</span>
+            </li>
+            ))}
          </ul>
                <li>
             <div>
