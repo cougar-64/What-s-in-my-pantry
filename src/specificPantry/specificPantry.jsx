@@ -5,10 +5,14 @@ export function SpecificPantry() {
    const [currentPantry, setCurrentPantry] = React.useState(null);
    const [newItem, setNewItem] = React.useState('');
    const [newQuantity, setnewQuantity] = React.useState('');
+   const [user, setUser] = React.useState('');
    React.useEffect(() => {
       const storedPantry = localStorage.getItem('currentPantry');
+      const user = localStorage.getItem('user');
+      if (user)
+         setUser(user);
       if (storedPantry)
-      setCurrentPantry(JSON.parse(storedPantry));
+         setCurrentPantry(JSON.parse(storedPantry));
 }, []);
    function addItem() {
       const updatedItems = [
@@ -64,11 +68,12 @@ export function SpecificPantry() {
                <NavLink to="/pantrys">
                   <button type="button">Leave Pantry</button>
                </NavLink>
+               {user === currentPantry.creator && (
                <NavLink to="/pantrys">
-                  <button type="button">Delete pantry - only shows up if they are the 
-                     creator of that pantry
+                  <button type="button">Delete pantry
                   </button>
                </NavLink>
+               )}
                </li>
          <NavLink to="/">
                <button type="submit">Logout</button>
