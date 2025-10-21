@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './app.css';
 
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
@@ -10,6 +10,14 @@ import { NewPantry } from './newPantry/newPantry';
 import { SpecificPantry } from './specificPantry/specificPantry';
 
 export default function App() {
+   const [user, setUser] = React.useState('');
+   React.useEffect(() => {
+      const user = localStorage.getItem('user');
+      if (user)
+         setUser(user);
+      else
+         setUser(null);
+   }, [])
    return (
    <BrowserRouter>
    <div className='app bg-dark text-light'>
@@ -18,7 +26,7 @@ export default function App() {
          <nav>
             <menu>
                <li><NavLink to="/">Home</NavLink></li>
-               <li><NavLink to="pantrys">My Pantrys</NavLink></li>
+               {user && <li><NavLink to="pantrys">My Pantrys</NavLink></li>}
                <li><NavLink to="feedback">Submit Feedback!</NavLink></li>
                <li><NavLink to="about">About</NavLink></li>
             </menu>
@@ -27,7 +35,7 @@ export default function App() {
       </header>
 
       <Routes>
-         <Route path='/' element={<Login />} exact />
+         <Route path='/' element={<Login setUser={setUser}/>} exact />
          <Route path='/about' element={<About />} />
          <Route path='/feedback' element={<Feedback />} />
          <Route path='/newPantry' element={<NewPantry />} />
