@@ -2,31 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function SpecificPantry() {
+   const [currentPantry, setCurrentPantry] = React.useState(null);
    const [newItem, setNewItem] = React.useState('');
    const [newQuantity, setnewQuantity] = React.useState('');
-   const [items, setItems] = React.useState([]);
-   const currentPantry = localStorage.getItem('currentPantry');
    React.useEffect(() => {
-      const storedItems =JSON.parse(localStorage.getItem(`pantryItems_${currentPantry}`)) || [];
-      setItems(storedItems);
-   }, []);
+      const storedPantry = localStorage.getItem('currentPantry');
+      if (storedPantry)
+      setCurrentPantry(JSON.parse(storedPantry));
+}, []);
    function addItem() {
       const updatedItems = [
-         ...items,
+         ...currentPantry.items,
          { name: newItem, quantity: newQuantity }
       ];
-      setItems(updatedItems);
-      localStorage.setItem(
-        `pantryItems_${currentPantry}`,
-        JSON.stringify(updatedItems)
-      );
+      const updatedPantry = { ...currentPantry, items: updatedItems };
+      setCurrentPantry(updatedPantry);
+      localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
    }
+   if (!currentPantry) return <div>Loading pantry...</div>;
+
+
    return (
       <main>
-         <h1>Welcome to {currentPantry} </h1>
-         <h2>Unique ID: LOAD UNIQUE ID FROM DATABASE</h2>
-         <span className="pantry-creator">Pantry creator: - load from database</span>
-         <span className="pantry-members">Pantry members: - load from database</span>
+         <h1>Welcome to {currentPantry.name} </h1>
+         <h2> UNIQUE ID: {currentPantry.ID}</h2>
+         <span className="pantry-creator">Pantry creator: {currentPantry.creator}</span>
+         <span className="pantry-members">Pantry members: {currentPantry.members}</span>
          <ul>
                <li className="Pantry-item">load items from database</li>
                <li className="example-item">Pasta 

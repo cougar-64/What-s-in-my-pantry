@@ -14,10 +14,13 @@ export function NewPantry() {
       const uniqueID = Math.floor(1000 + Math.random() * 9000);
       const pantryData = {
          name: pantryName,
-         ID: uniqueID
+         ID: uniqueID,
+         creator: user,
+         members: [user],
+         items: []
       };
       window.location.href="/specificPantry";
-      localStorage.setItem('currentPantry', pantryData);
+      localStorage.setItem('currentPantry', JSON.stringify(pantryData));
    }
    return (
       <main>
