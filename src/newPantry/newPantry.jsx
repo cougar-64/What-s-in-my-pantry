@@ -3,6 +3,7 @@ import React from 'react';
 export function NewPantry() {
    const handleSubmit = async (event) => {
       event.preventDefault();
+      const pantryName = event.target.pantryName.value;
       window.location.href="/specificPantry";
       localStorage.setItem((pantryName), pantryName)
    }
