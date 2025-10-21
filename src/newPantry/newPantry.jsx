@@ -11,8 +11,13 @@ export function NewPantry() {
    const handleSubmit = async (event) => {
       event.preventDefault();
       const pantryName = event.target.pantryName.value;
+      const uniqueID = Math.floor(1000 + Math.random() * 9000);
+      const pantryData = {
+         name: pantryName,
+         ID: uniqueID
+      };
       window.location.href="/specificPantry";
-      localStorage.setItem('currentPantry', pantryName);
+      localStorage.setItem('currentPantry', pantryData);
    }
    return (
       <main>

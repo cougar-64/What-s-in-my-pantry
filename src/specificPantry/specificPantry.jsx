@@ -5,8 +5,8 @@ export function SpecificPantry() {
    const [newItem, setNewItem] = React.useState('');
    const [newQuantity, setnewQuantity] = React.useState('');
    const [items, setItems] = React.useState([]);
+   const currentPantry = localStorage.getItem('currentPantry');
    React.useEffect(() => {
-      const currentPantry = localStorage.getItem('currentPantry');
       const storedItems =JSON.parse(localStorage.getItem(`pantryItems_${currentPantry}`)) || [];
       setItems(storedItems);
    }, []);
@@ -21,10 +21,9 @@ export function SpecificPantry() {
         JSON.stringify(updatedItems)
       );
    }
-   const [pantryName, setPantryName] = React.useState(localStorage.getItem('currentPantry' || 'default'));
    return (
       <main>
-         <h1>Welcome to {pantryName} </h1>
+         <h1>Welcome to {currentPantry} </h1>
          <h2>Unique ID: LOAD UNIQUE ID FROM DATABASE</h2>
          <span className="pantry-creator">Pantry creator: - load from database</span>
          <span className="pantry-members">Pantry members: - load from database</span>
