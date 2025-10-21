@@ -11,6 +11,14 @@ export function Pantrys() {
    }
    }, []);
    const activePantrys = user?.pantrys || [];
+
+   function removeUser() {
+      localStorage.removeItem('user');
+      setUser(null);
+      window.location.reload();
+   }
+
+
    return (
       <main>
       <h1 className="users">
@@ -36,7 +44,7 @@ export function Pantrys() {
             <button className="add-new-pantry" type="button">Create a new pantry</button>
           </NavLink>
       <NavLink to="/">
-         <button className="logout" type="submit">Logout</button>
+         <button onClick={removeUser} className="logout" type="submit">Logout</button>
       </NavLink>
       </main>
    )

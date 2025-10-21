@@ -41,6 +41,11 @@ export function SpecificPantry() {
       
    }
 
+   function removeUser() {
+      localStorage.removeItem('user');
+      setUser(null);
+   }
+
    if (!currentPantry) return <div>Loading pantry...</div>;
 
 
@@ -76,7 +81,7 @@ export function SpecificPantry() {
                )}
                </li>
          <NavLink to="/">
-               <button type="submit">Logout</button>
+               <button onClick={removeUser} type="button">Logout</button>
             </NavLink>
       </main>
    )
