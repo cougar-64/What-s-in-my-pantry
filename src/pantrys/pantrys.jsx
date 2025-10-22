@@ -7,7 +7,8 @@ export function Pantrys() {
    React.useEffect(() => {
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
-         setUser(storedUser);
+         const username = JSON.parse(storedUser);
+         setUser(username);
    }
    }, []);
    const activePantrys = user?.pantrys || [];
@@ -15,14 +16,14 @@ export function Pantrys() {
    function removeUser() {
       localStorage.removeItem('user');
       setUser(null);
-      window.location.reload();
+      window.location.href = '/';
    }
 
 
    return (
       <main>
       <h1 className="users">
-         User: {user}</h1>
+         User: {user?.name}</h1>
       <ul className="notification">
          <li className="player-name">Websocket Notification - Johnny created a new pantry</li>
          <li className="player-name">Websocket Notification - Lisa joined 'Work' pantry</li>

@@ -44,6 +44,7 @@ export function SpecificPantry() {
    function removeUser() {
       localStorage.removeItem('user');
       setUser(null);
+      window.location.href = '/';
    }
 
    if (!currentPantry) return <div>Loading pantry...</div>;

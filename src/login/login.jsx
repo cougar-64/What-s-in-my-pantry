@@ -4,8 +4,12 @@ import { NavLink } from 'react-router-dom';
 export function Login({ setUser }) {
    const [text, setText] = React.useState('');
    function loginUser(){
-      localStorage.setItem('user', text);
-      setUser(text);
+      const userData = {
+         name: text,
+         pantrys: []
+      }
+      localStorage.setItem('user', JSON.stringify(userData));
+      setUser(userData);
    }
 
    function textChange(e) {
