@@ -10,7 +10,7 @@ export function SpecificPantry() {
       const storedPantry = localStorage.getItem('currentPantry');
       const user = localStorage.getItem('user');
       if (user)
-         setUser(user);
+         setUser(JSON.parse(user));
       if (storedPantry)
          setCurrentPantry(JSON.parse(storedPantry));
 }, []);
@@ -21,7 +21,14 @@ export function SpecificPantry() {
       ];
       const updatedPantry = { ...currentPantry, items: updatedItems };
       setCurrentPantry(updatedPantry);
+      const updatedUserPantrys = user.pantrys.map(p =>
+         p.ID === updatedPantry.ID ? updatedPantry : p
+      );
+      const updatedUser ={ ...user, pantrys: updatedUserPantrys };
+      setUser(updatedUser);
+   
       localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
+      localStorage.setItem('user', JSON.stringify(updatedUser));
    }
 
    function increaseItem(index) {
@@ -38,6 +45,7 @@ export function SpecificPantry() {
          updatedItems.splice(index, 1);
       }
       setCurrentPantry({...currentPantry, items: updatedItems});
+
       
    }
 

@@ -5,7 +5,8 @@ export function NewPantry() {
    React.useEffect(() => {
       const storedUser = localStorage.getItem('user');
       if (storedUser) {
-         setUser(storedUser);
+         const username = JSON.parse(storedUser);
+         setUser(username);
       }
    }, []);
    const handleSubmit = async (event) => {
@@ -15,17 +16,20 @@ export function NewPantry() {
       const pantryData = {
          name: pantryName,
          ID: uniqueID,
-         creator: user,
-         members: [user],
+         creator: user.name,
+         members: [user.name],
          items: []
       };
       window.location.href="/specificPantry";
+      const updatedUser = {...user, pantrys: [...(user.pantrys || []), pantryData]}
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setUser(updatedUser);
       localStorage.setItem('currentPantry', JSON.stringify(pantryData));
    }
    return (
       <main>
       <h1 className="users">
-         User: {user}</h1>
+         User: {user?.name}</h1>
          <ul className="notification">
             <li className="player-name">Websocket Notification - Johnny created a new pantry</li>
             <li className="player-name">Websocket Notification - Lisa joined 'Work' pantry</li>

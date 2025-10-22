@@ -34,8 +34,11 @@ export function Pantrys() {
       <h1>Active pantrys: </h1>
       {activePantrys.length > 0 ? (
           <ul>
-            {activePantrys.map((p, i) => (
-              <li key={i}>{p}</li>
+            {activePantrys.map((p) => (
+              <li key={p.ID}>
+               <NavLink to='/specificPantry' 
+               onClick={() => localStorage.setItem('currentPantry', JSON.stringify(p))}>
+               {p.name} </NavLink> </li>
             ))}
           </ul>
         ) : (
