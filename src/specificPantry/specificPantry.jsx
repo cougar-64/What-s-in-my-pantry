@@ -34,7 +34,13 @@ export function SpecificPantry() {
    function increaseItem(index) {
       const updatedItems = [...currentPantry.items];
       updatedItems[index].quantity = Number(updatedItems[index].quantity) + 1;
+      const updatedPantry = { ...currentPantry, items: updatedItems };
       setCurrentPantry({...currentPantry, items: updatedItems});
+      const updatedUser = {
+         ...user,
+         pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
+      };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
    }
    function decreaseItem(index) {
       const updatedItems = [...currentPantry.items];
@@ -44,7 +50,13 @@ export function SpecificPantry() {
       else {
          updatedItems.splice(index, 1);
       }
+      const updatedPantry = { ...currentPantry, items: updatedItems };
       setCurrentPantry({...currentPantry, items: updatedItems});
+      const updatedUser = {
+         ...user, 
+         pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
+      };
+      localStorage.setItem('user', JSON.stringify(updatedUser));
 
       
    }
