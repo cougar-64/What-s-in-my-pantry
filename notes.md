@@ -95,3 +95,63 @@ Handling the toggling of the checkboxes was particularly interesting.
   ))}
 </div>
 ```
+
+
+
+
+# Web Dev Midterm Notes
+
+## HTML & CSS
+- `<link>`: links external files (like CSS).
+- `<div>`: container for grouping; no semantic meaning.
+- `#id` targets a unique element; `.class` targets multiple.
+- **Padding** = inside space; **Margin** = outside space.
+- **Flexbox:** `display:flex` → children in a row (default).
+- `padding:10px 20px` = top/bottom 10px, left/right 20px.
+- `<span>` = inline element.
+- Make all divs red: `div { background:red; }`
+- Image link: `<a href="URL"><img src="img.jpg"></a>`
+- Box model (in→out): content → padding → border → margin.
+- Set “trouble” green only:
+  ```html
+  <span class="green">trouble</span>double
+.green { color: green; }
+Headings: <h1> <h2> <h3>; paragraph <p>; lists <ol> <ul>.
+Doctype: <!DOCTYPE html>
+JavaScript
+Arrow fn: const add = (a,b)=>a+b
+map(): transforms array → [1,2,3].map(x=>x*2)=[2,4,6]
+getElementById("btn").addEventListener("click", fn) → runs fn on click.
+document.querySelector("#id") → select element by id.
+DOM = tree of HTML elements; JS can read/change it.
+Loop: for(let i=0;i<3;i++) console.log(i);
+Change color: document.getElementById("byu").style.color="green";
+JS object: const obj={name:"Sam",age:25};
+Add property: obj.job="dev";
+Include JS: <script src="file.js"></script>
+Change text: document.getElementById("animal").innerText="crow";
+JSON: text data, key/value → {"name":"Sam"}
+JS Logic Syntax
+if(x>0){...} else {...}
+for(let i=0;i<5;i++){...}
+while(cond){...}
+switch(val){case 1:...;break;default:...;}
+Promises
+Promise.resolve("ok").then(console.log) → "ok"
+Promise.reject("err").catch(console.log) → "err"
+Terminal Commands
+chmod perms | pwd dir | cd change dir | ls list
+vim/nano editors | mkdir make dir | mv move | rm remove
+man manual | ssh remote login | ps processes
+wget download | sudo admin
+ls -la: show all (even hidden) in detail
+Remote shell: ssh
+Domains & Networking
+banana.fruit.bozo.click →
+TLD: .click
+Root: bozo.click
+Subdomain: banana.fruit
+HTTPS needs SSL cert ✅
+DNS A record → IP (not another A)
+Ports: 443 HTTPS | 80 HTTP | 22 SSH
+
