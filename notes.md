@@ -99,59 +99,164 @@ Handling the toggling of the checkboxes was particularly interesting.
 
 
 
-# Web Dev Midterm Notes
-
-## HTML & CSS
-- `<link>`: links external files (like CSS).
-- `<div>`: container for grouping; no semantic meaning.
-- `#id` targets a unique element; `.class` targets multiple.
-- **Padding** = inside space; **Margin** = outside space.
-- **Flexbox:** `display:flex` → children in a row (default).
-- `padding:10px 20px` = top/bottom 10px, left/right 20px.
-- `<span>` = inline element.
-- Make all divs red: `div { background:red; }`
-- Image link: `<a href="URL"><img src="img.jpg"></a>`
-- Box model (in→out): content → padding → border → margin.
-- Set “trouble” green only:
-  ```html
-  <span class="green">trouble</span>double
+HTML & CSS Basics
+1. What does the <link> element do?
+It links external resources to an HTML document — most commonly a CSS stylesheet.
+Example:
+<link rel="stylesheet" href="styles.css">
+2. What does a <div> tag do?
+It’s a generic container for grouping elements. It has no semantic meaning, but you can style or structure your layout using it.
+3. Difference between #title and .grid selectors?
+#title → targets an element with id="title" (IDs are unique per page).
+.grid → targets all elements with class="grid" (can be used on many elements).
+4. Difference between padding and margin?
+Padding: space inside the element’s border (between content and border).
+Margin: space outside the element’s border (between elements).
+5. Given HTML and CSS using flex — how are images displayed?
+With display: flex;, child elements (like images) are laid out:
+In a row by default (flex-direction: row)
+Evenly spaced or aligned depending on justify-content and align-items.
+Example:
+.container {
+  display: flex;
+  justify-content: space-around;
+}
+→ Images will sit side by side.
+6. What does the following padding CSS do?
+Example:
+padding: 10px 20px;
+Top & bottom = 10px, left & right = 20px.
+JavaScript Concepts
+7. Arrow function syntax:
+const add = (a, b) => a + b;
+It’s a shorter way to write functions. Arrow functions:
+Don’t have their own this.
+Are often used for callbacks or simple expressions.
+8. What does code using map output?
+map() creates a new array by applying a function to each element.
+Example:
+[1,2,3].map(x => x * 2)  // → [2,4,6]
+9. Code using getElementById and addEventListener:
+document.getElementById("btn").addEventListener("click", () => {
+  console.log("Clicked!");
+});
+It finds an element with that ID and runs code when clicked.
+10. What does this line do using a # selector?
+document.querySelector("#title");
+Selects the element with id="title".
+11. Which of the following are true about the DOM?
+It’s the Document Object Model, a tree structure of all HTML elements.
+JavaScript can read and change HTML through it.
+Every HTML element becomes a node in the DOM tree.
+12. Default display value of <span>:
+inline (doesn’t start a new line, just flows in text).
+13. How to make all divs red in CSS:
+div {
+  background-color: red;
+}
+14. How to display an image with a hyperlink:
+<a href="https://example.com">
+  <img src="photo.jpg" alt="photo">
+</a>
+15. CSS box model order (inside → out):
+content → padding → border → margin
+16. Set text “trouble” to green but not “double”:
+HTML:
+<p><span class="green">trouble</span>double</p>
+CSS:
 .green { color: green; }
-Headings: <h1> <h2> <h3>; paragraph <p>; lists <ol> <ul>.
-Doctype: <!DOCTYPE html>
-JavaScript
-Arrow fn: const add = (a,b)=>a+b
-map(): transforms array → [1,2,3].map(x=>x*2)=[2,4,6]
-getElementById("btn").addEventListener("click", fn) → runs fn on click.
-document.querySelector("#id") → select element by id.
-DOM = tree of HTML elements; JS can read/change it.
-Loop: for(let i=0;i<3;i++) console.log(i);
-Change color: document.getElementById("byu").style.color="green";
-JS object: const obj={name:"Sam",age:25};
-Add property: obj.job="dev";
-Include JS: <script src="file.js"></script>
-Change text: document.getElementById("animal").innerText="crow";
-JSON: text data, key/value → {"name":"Sam"}
-JS Logic Syntax
-if(x>0){...} else {...}
-for(let i=0;i<5;i++){...}
-while(cond){...}
-switch(val){case 1:...;break;default:...;}
-Promises
-Promise.resolve("ok").then(console.log) → "ok"
-Promise.reject("err").catch(console.log) → "err"
-Terminal Commands
-chmod perms | pwd dir | cd change dir | ls list
-vim/nano editors | mkdir make dir | mv move | rm remove
-man manual | ssh remote login | ps processes
-wget download | sudo admin
-ls -la: show all (even hidden) in detail
-Remote shell: ssh
-Domains & Networking
-banana.fruit.bozo.click →
-TLD: .click
-Root: bozo.click
-Subdomain: banana.fruit
-HTTPS needs SSL cert ✅
-DNS A record → IP (not another A)
-Ports: 443 HTTPS | 80 HTTP | 22 SSH
+17. Code output using for loop and console.log:
+Example:
+for (let i = 0; i < 3; i++) {
+  console.log(i);
+}
+// → 0, 1, 2
+18. Use JS to select element with id “byu” and make it green:
+document.getElementById("byu").style.color = "green";
+19. Opening HTML tags:
+Paragraph → <p>
+Ordered list → <ol>
+Unordered list → <ul>
+1st-level heading → <h1>
+2nd-level → <h2>
+3rd-level → <h3>
+20. Declare document type as HTML:
+<!DOCTYPE html>
+JavaScript Syntax & Logic
+21. Valid JS syntax examples:
+if (x > 0) { ... } 
+else { ... }
 
+for (let i = 0; i < 5; i++) { ... }
+
+while (condition) { ... }
+
+switch (day) {
+  case "Mon": ...
+  default: ...
+}
+22. Correct syntax for creating an object:
+const person = { name: "Sam", age: 25 };
+23. Can you add new properties to JS objects?
+✅ Yes.
+person.job = "developer";
+24. Include JS in HTML:
+<script src="script.js"></script>
+or
+<script>
+  alert("hi");
+</script>
+25. Change "animal" to "crow" in HTML:
+HTML:
+<p id="animal">fish</p>
+JS:
+document.getElementById("animal").innerText = "crow";
+26. Which describes JSON correctly?
+JSON = JavaScript Object Notation
+Text-based data format (key-value pairs).
+Uses double quotes for keys and strings.
+Example:
+{"name": "Sam", "age": 25}
+Terminal / Shell Commands
+27. Command meanings:
+chmod → change file permissions
+pwd → print working directory
+cd → change directory
+ls → list files
+vim, nano → text editors
+mkdir → make new directory
+mv → move or rename files
+rm → remove files
+man → show manual/help
+ssh → connect to another computer remotely
+ps → show running processes
+wget → download from the web
+sudo → run as superuser (admin)
+28. Which command creates a remote shell session?
+✅ ssh
+29. ls -la means:
+List all files (including hidden ones) in long format (permissions, owner, etc.).
+Internet & Networking
+30. For domain banana.fruit.bozo.click:
+Top-level domain → .click
+Root domain → bozo.click
+Subdomain → banana.fruit
+31. Is a web certificate necessary to use HTTPS?
+✅ Yes — HTTPS requires a valid SSL/TLS certificate.
+32. Can a DNS A record point to another A record?
+❌ No. It must point directly to an IP address.
+(Use a CNAME record to point to another domain.)
+33. Ports:
+443 → HTTPS
+80 → HTTP
+22 → SSH
+Promises
+34. What will code using Promises output?
+Conceptually:
+Promises represent future results (success or failure).
+Example:
+Promise.resolve("done").then(console.log);
+// → "done"
+If rejected:
+Promise.reject("error").catch(console.log);
+// → "error"
