@@ -14,7 +14,8 @@ const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.static('public'));
 const authCookieName = 'token';
 
-let users = [];
+let userData = new Map();
+let pantrys = new Map();
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -55,6 +56,35 @@ apiRouter.post('/auth/create', async (req, res) => {
  });
 
 
+ // get pantrys
+ apiRouter.get('/pantry', async (req, res) => {
+   const token = req.cookies[authCookieName];
+   const user = [...userData.values()].find(u => u.token === token);
+ 
+   if (!user) {
+     return res.status(401).send({ msg: 'Unauthorized' });
+   }
+ 
+   const userPantries = pantrys.get(user.email) || [];
+   res.send({ pantrys: userPantries });
+ });
+
+ // set pantrys
+ apiRouter.post('/pantry', async (req, res) => {
+   const token = req.cookies[authCookieName];
+   const user = [...userData.values()].find(u => u.token === token);
+
+   if (!user) {
+      return res.status(401).send({ msg: "Unauthorized"});
+   }
+   const userPantries = pantrys.get(user.email);
+   userPantries.push(req.body);
+   pantrys.set(user.email, userPantries);
+   res.send({pantrys: userPantries});
+   console.log("items in pantry:", userPantries);
+ });
+
+
  async function createUser(email, password) {
    const passwordHash = await bcrypt.hash(password, 10);
  
@@ -63,24 +93,26 @@ apiRouter.post('/auth/create', async (req, res) => {
      password: passwordHash,
      token: uuid.v4(),
    };
-   users.push(user);
+   userData.set(email, user);
+   pantrys.set(email, []);
  
    return user;
  }
 
 
  async function findUser(field, value) {
-   if (!value) return null;
- 
-   return users.find((u) => u[field] === value);
+   if (field === 'email') {
+      return userData.get(value) || null;
+   }
+   return null;
  }
 
  function setAuthCookie(res, authToken) {
-   res.cookie(authCookieName, authToken, {
-     maxAge: 1000 * 60 * 60 * 24 * 365,
-     secure: true,
-     httpOnly: true,
-     sameSite: 'strict',
+   res.cookie('token', authToken, {
+     maxAge: 1000 * 60 * 60 * 24, // 1 day
+     httpOnly: true,              // good practice
+     secure: false,               // must be false for http://localhost
+     sameSite: 'lax'              // allows cross-origin requests from frontend port
    });
  }
 
