@@ -41,7 +41,6 @@ export function NewPantry() {
    }
 
    const data = await response.json();
-   console.log('Pantry added:', data);
 
    const updatedUser = { ...user, pantrys: [...(user.pantrys || []), pantryData] };
    setUser(updatedUser);

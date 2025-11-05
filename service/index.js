@@ -55,6 +55,25 @@ apiRouter.post('/auth/create', async (req, res) => {
    res.status(401).send({ msg: 'Unauthorized' });
  });
 
+ // logout the user
+ apiRouter.post('/logout', async (req, res) => {
+   const token = req.cookies[authCookieName];
+   const user = [...userData.values()].find(u => u.token === token);
+ 
+   if (!user) {
+     return res.status(401).send({ msg: 'Unauthorized' });
+   }
+ 
+   userData.delete(user.email);
+ 
+   res.clearCookie(authCookieName, {
+     httpOnly: true,
+     sameSite: 'lax',
+   });
+ 
+   res.send({ msg: 'Logged out' });
+ })
+
 
  // get pantrys
  apiRouter.get('/pantry', async (req, res) => {
@@ -81,7 +100,6 @@ apiRouter.post('/auth/create', async (req, res) => {
    userPantries.push(req.body);
    pantrys.set(user.email, userPantries);
    res.send({pantrys: userPantries});
-   console.log("items in pantry:", userPantries);
  });
 
 

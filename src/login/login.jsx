@@ -27,24 +27,41 @@ export function Login({ setUser }) {
   }
 
   async function loginUser() {
-    const response = await fetch('http://localhost:4000/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ email, password })
-    });
-
-    if (!response.ok) {
-      const error = await response.json();
-      alert(error.msg || 'Login failed');
-      return;
-    }
-
-    const userData = await response.json();
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser(userData);
-    navigate('/pantrys');
-  }
+   const response = await fetch('http://localhost:4000/api/auth/login', {
+     method: 'POST',
+     headers: { 'Content-Type': 'application/json' },
+     credentials: 'include',  // send cookies
+     body: JSON.stringify({ email, password })
+   });
+ 
+   if (!response.ok) {
+     const error = await response.json();
+     alert(error.msg || 'Login failed');
+     return;
+   }
+ 
+   const userData = await response.json();
+   setUser(userData);
+   localStorage.setItem('user', JSON.stringify(userData));
+ 
+   // Fetch pantries for this user
+   const pantryResponse = await fetch('http://localhost:4000/api/pantry', {
+     method: 'GET',
+     credentials: 'include'  // important to send the auth cookie
+   });
+ 
+   if (pantryResponse.ok) {
+     const pantryData = await pantryResponse.json();
+     const updatedUser = { ...userData, pantries: pantryData.pantrys };
+     setUser(updatedUser);
+     localStorage.setItem('user', JSON.stringify(updatedUser));
+   } else {
+     console.warn('Failed to load pantries');
+   }
+ 
+   navigate('/pantrys');
+ }
+ 
 
   return (
     <main>

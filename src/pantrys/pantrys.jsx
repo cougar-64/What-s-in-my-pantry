@@ -13,8 +13,13 @@ export function Pantrys() {
    }, []);
    const activePantrys = user?.pantrys || [];
 
-   function removeUser() {
-      localStorage.removeItem('user');
+   async function removeUser() {
+      await fetch('http://localhost:4000/api/auth/logout', {
+         method: 'POST',
+         credentials: 'include', // important to send the cookie
+      });
+      
+      localStorage.removeItem('user');  // just remove the user info
       setUser(null);
       window.location.href = '/';
    }
