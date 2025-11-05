@@ -26,7 +26,7 @@ export default function App() {
          <nav>
             <menu>
                <li><NavLink to="/">Home</NavLink></li>
-               {user && <li><NavLink to="pantrys" setUser={setUser}>My Pantrys</NavLink></li>}
+               {user && <li><NavLink to="pantrys" >My Pantrys</NavLink></li>}
                <li><NavLink to="feedback">Submit Feedback!</NavLink></li>
                <li><NavLink to="about">About</NavLink></li>
             </menu>
