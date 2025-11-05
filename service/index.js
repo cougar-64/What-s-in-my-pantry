@@ -103,6 +103,24 @@ apiRouter.post('/auth/create', async (req, res) => {
  });
 
 
+ // Update a pantry
+apiRouter.put('/pantry/:id', (req, res) => {
+   const token = req.cookies[authCookieName];
+   const user = [...userData.values()].find(u => u.token === token);
+ 
+   if (!user) return res.status(401).send({ msg: "Unauthorized" });
+ 
+   const userPantries = pantrys.get(user.email) || [];
+   const pantryIndex = userPantries.findIndex(p => p.ID === parseInt(req.params.id));
+ 
+   if (pantryIndex === -1) return res.status(404).send({ msg: "Pantry not found" });
+ 
+   userPantries[pantryIndex] = req.body;
+   pantrys.set(user.email, userPantries);
+ 
+   res.send({ pantries: userPantries });
+ });
+
  async function createUser(email, password) {
    const passwordHash = await bcrypt.hash(password, 10);
  

@@ -14,52 +14,82 @@ export function SpecificPantry() {
       if (storedPantry)
          setCurrentPantry(JSON.parse(storedPantry));
 }, []);
-   function addItem() {
-      const updatedItems = [
-         ...currentPantry.items,
-         { name: newItem, quantity: newQuantity }
-      ];
-      const updatedPantry = { ...currentPantry, items: updatedItems };
-      setCurrentPantry(updatedPantry);
-      const updatedUserPantrys = user.pantrys.map(p =>
-         p.ID === updatedPantry.ID ? updatedPantry : p
-      );
-      const updatedUser ={ ...user, pantrys: updatedUserPantrys };
-      setUser(updatedUser);
-   
-      localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-   }
+function addItem() {
+   const updatedItems = [
+     ...currentPantry.items,
+     { name: newItem, quantity: newQuantity }
+   ];
+   const updatedPantry = { ...currentPantry, items: updatedItems };
+   setCurrentPantry(updatedPantry);
+ 
+   const updatedUserPantrys = user.pantrys.map(p =>
+     p.ID === updatedPantry.ID ? updatedPantry : p
+   );
+   const updatedUser = { ...user, pantrys: updatedUserPantrys };
+   setUser(updatedUser);
+ 
+   localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
+   localStorage.setItem('user', JSON.stringify(updatedUser));
+ 
+   updateBackend(updatedPantry);
+ }
 
-   function increaseItem(index) {
-      const updatedItems = [...currentPantry.items];
-      updatedItems[index].quantity = Number(updatedItems[index].quantity) + 1;
-      const updatedPantry = { ...currentPantry, items: updatedItems };
-      setCurrentPantry({...currentPantry, items: updatedItems});
-      const updatedUser = {
-         ...user,
-         pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
-      };
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-   }
-   function decreaseItem(index) {
-      const updatedItems = [...currentPantry.items];
-      if (updatedItems[index].quantity > 1) {
-         updatedItems[index].quantity = Number(updatedItems[index].quantity) - 1;
-      }
-      else {
-         updatedItems.splice(index, 1);
-      }
-      const updatedPantry = { ...currentPantry, items: updatedItems };
-      setCurrentPantry({...currentPantry, items: updatedItems});
-      const updatedUser = {
-         ...user, 
-         pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
-      };
-      localStorage.setItem('user', JSON.stringify(updatedUser));
+ function increaseItem(index) {
+   const updatedItems = [...currentPantry.items];
+   updatedItems[index].quantity = Number(updatedItems[index].quantity) + 1;
+   const updatedPantry = { ...currentPantry, items: updatedItems };
+   setCurrentPantry(updatedPantry);
+ 
+   const updatedUser = {
+     ...user,
+     pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
+   };
+   setUser(updatedUser);
+ 
+   localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
+   localStorage.setItem('user', JSON.stringify(updatedUser));
+ 
+   updateBackend(updatedPantry);
 
-      
+ }
+ 
+ function decreaseItem(index) {
+   const updatedItems = [...currentPantry.items];
+ 
+   if (updatedItems[index].quantity > 1) {
+     updatedItems[index].quantity = Number(updatedItems[index].quantity) - 1;
+   } else {
+     updatedItems.splice(index, 1);
    }
+ 
+   const updatedPantry = { ...currentPantry, items: updatedItems };
+   setCurrentPantry(updatedPantry);
+ 
+   const updatedUser = {
+     ...user,
+     pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
+   };
+   setUser(updatedUser);
+ 
+   localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
+   localStorage.setItem('user', JSON.stringify(updatedUser));
+ 
+   updateBackend(updatedPantry);
+ }
+
+   async function updateBackend(updatedPantry) {
+      try {
+        const res = await fetch(`http://localhost:4000/api/pantry/${updatedPantry.ID}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include', // send cookies
+          body: JSON.stringify(updatedPantry),
+        });
+        if (!res.ok) console.warn("Failed to update pantry");
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
    function removeUser() {
       localStorage.removeItem('user');
