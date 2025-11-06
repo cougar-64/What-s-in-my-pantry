@@ -153,7 +153,7 @@ apiRouter.put('/pantry/:id', (req, res) => {
    });
  }
 
-
+// third party api
  apiRouter.get('/ducks/quack', async (req, res) => {
    try {
      const response = await fetch('https://random-d.uk/api/v2/quack');
