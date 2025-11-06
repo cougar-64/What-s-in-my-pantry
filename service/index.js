@@ -121,6 +121,7 @@ apiRouter.put('/pantry/:id', (req, res) => {
    res.send({ pantries: userPantries });
  });
 
+
  async function createUser(email, password) {
    const passwordHash = await bcrypt.hash(password, 10);
  
@@ -145,10 +146,10 @@ apiRouter.put('/pantry/:id', (req, res) => {
 
  function setAuthCookie(res, authToken) {
    res.cookie('token', authToken, {
-     maxAge: 1000 * 60 * 60 * 24, // 1 day
-     httpOnly: true,              // good practice
-     secure: false,               // must be false for http://localhost
-     sameSite: 'lax'              // allows cross-origin requests from frontend port
+     maxAge: 1000 * 60 * 60 * 24,
+     httpOnly: true,
+     secure: false,
+     sameSite: 'lax'
    });
  }
 

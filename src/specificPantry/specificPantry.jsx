@@ -124,12 +124,7 @@ function addItem() {
                <NavLink to="/pantrys">
                   <button type="button">Leave Pantry</button>
                </NavLink>
-               {user === currentPantry.creator && (
-               <NavLink to="/pantrys">
-                  <button type="button">Delete pantry
-                  </button>
-               </NavLink>
-               )}
+
                </li>
          <NavLink to="/">
                <button onClick={removeUser} type="button">Logout</button>
