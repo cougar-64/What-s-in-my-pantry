@@ -154,6 +154,21 @@ apiRouter.put('/pantry/:id', (req, res) => {
  }
 
 
+ apiRouter.get('/ducks/quack', async (req, res) => {
+   try {
+     const response = await fetch('https://random-d.uk/api/v2/quack');
+     if (!response.ok) {
+       return res.status(response.status).send({ msg: 'Failed to fetch duck' });
+     }
+     const data = await response.json();
+     res.json(data);
+   } catch (err) {
+     console.error('Error fetching duck:', err);
+     res.status(500).send({ msg: 'Internal server error' });
+   }
+ });
+
+
 app.listen(port, () => {
    console.log(`Listening on port ${port}`);
  })
