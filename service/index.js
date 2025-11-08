@@ -6,7 +6,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(cors({
-   origin: 'https://byu260.click/startup',
+   origin: 'https://startup.byu260.click',
    credentials: true
  }));
 
