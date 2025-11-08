@@ -26,7 +26,7 @@ export function NewPantry() {
       items: []
     };
 
-   const response = await fetch('http://startup.byu260.click/api/pantry', {
+   const response = await fetch('/api/pantry', {
       method: 'POST',
       headers: {
          'Content-Type': 'application/json'
