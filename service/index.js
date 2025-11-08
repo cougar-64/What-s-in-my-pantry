@@ -168,6 +168,10 @@ apiRouter.put('/pantry/:id', (req, res) => {
    }
  });
 
+ app.get('*', (req, res) => {
+  res.sendFile('index.html', { root: 'public' });
+});
+
 
 app.listen(port, () => {
    console.log(`Listening on port ${port}`);
