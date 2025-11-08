@@ -40,6 +40,10 @@ export function Pantrys() {
 
   const activePantrys = user?.pantrys || [];
 
+  async function removePantry() {
+    await fetch('/api/newPantry')
+  }
+
   async function removeUser() {
     await fetch('/api/auth/logout', {
       method: 'POST',

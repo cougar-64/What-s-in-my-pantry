@@ -42,12 +42,12 @@ export function NewPantry() {
 
    const data = await response.json();
 
-   const updatedUser = { ...user, pantrys: [...(user.pantrys || []), pantryData] };
+   const updatedUser = { ...user, pantrys: data.pantrys };
    setUser(updatedUser);
    localStorage.setItem('user', JSON.stringify(updatedUser));
    localStorage.setItem('currentPantry', JSON.stringify(pantryData));
 
-   window.location.href = "/specificPantry";
+  useNavigate("/specificPantry");
   };
 
   return (
