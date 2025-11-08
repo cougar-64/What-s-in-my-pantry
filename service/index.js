@@ -67,7 +67,7 @@ apiRouter.post('/auth/create', async (req, res) => {
    userData.delete(user.email);
  
    res.clearCookie(authCookieName, {
-     httpOnly: true,
+     httpOnly: false,
      sameSite: 'lax',
    });
  
@@ -147,7 +147,7 @@ apiRouter.put('/pantry/:id', (req, res) => {
  function setAuthCookie(res, authToken) {
    res.cookie('token', authToken, {
      maxAge: 1000 * 60 * 60 * 24,
-     httpOnly: true,
+     httpOnly: false,
      secure: false,
      sameSite: 'lax'
    });
