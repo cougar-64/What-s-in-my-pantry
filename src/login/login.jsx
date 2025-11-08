@@ -45,7 +45,7 @@ export function Login({ setUser }) {
    localStorage.setItem('user', JSON.stringify(userData));
  
    // Fetch pantries for this user
-   const pantryResponse = await fetch('http://startup.byu260.click/api/pantry', {
+   const pantryResponse = await fetch('https://startup.byu260.click/api/pantry', {
      method: 'GET',
      credentials: 'include'  // important to send the auth cookie
    });
