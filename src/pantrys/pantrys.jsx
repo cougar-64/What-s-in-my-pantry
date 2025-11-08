@@ -15,7 +15,7 @@ export function Pantrys() {
       setUser(parsedUser);
 
       try {
-        const res = await fetch('http://localhost:4000/api/pantry', {
+        const res = await fetch('http://startup.byu260.click/api/pantry', {
           method: 'GET',
           credentials: 'include',
         });
@@ -41,7 +41,7 @@ export function Pantrys() {
   const activePantrys = user?.pantrys || [];
 
   async function removeUser() {
-    await fetch('http://localhost:4000/api/auth/logout', {
+    await fetch('http://startup.byu260.click/api/auth/logout', {
       method: 'POST',
       credentials: 'include',
     });

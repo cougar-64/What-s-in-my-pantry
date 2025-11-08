@@ -79,7 +79,7 @@ function addItem() {
 
    async function updateBackend(updatedPantry) {
       try {
-        const res = await fetch(`http://localhost:4000/api/pantry/${updatedPantry.ID}`, {
+        const res = await fetch(`http://startup.byu260.click/api/pantry/${updatedPantry.ID}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include', // send cookies

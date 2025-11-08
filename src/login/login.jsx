@@ -7,7 +7,7 @@ export function Login({ setUser }) {
   const navigate = useNavigate();
 
   async function createUser() {
-    const response = await fetch('http://localhost:4000/api/auth/create', {
+    const response = await fetch('http://startup.byu260.click/api/auth/create', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
@@ -27,7 +27,7 @@ export function Login({ setUser }) {
   }
 
   async function loginUser() {
-   const response = await fetch('http://localhost:4000/api/auth/login', {
+   const response = await fetch('http://startup.byu260.click/api/auth/login', {
      method: 'POST',
      headers: { 'Content-Type': 'application/json' },
      credentials: 'include',  // send cookies
@@ -45,7 +45,7 @@ export function Login({ setUser }) {
    localStorage.setItem('user', JSON.stringify(userData));
  
    // Fetch pantries for this user
-   const pantryResponse = await fetch('http://localhost:4000/api/pantry', {
+   const pantryResponse = await fetch('http://startup.byu260.click/api/pantry', {
      method: 'GET',
      credentials: 'include'  // important to send the auth cookie
    });
