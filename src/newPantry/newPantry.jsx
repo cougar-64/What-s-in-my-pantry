@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export function NewPantry() {
   const [user, setUser] = React.useState(null);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
     const storedUser = localStorage.getItem('user');
@@ -48,7 +49,7 @@ export function NewPantry() {
    localStorage.setItem('user', JSON.stringify(updatedUser));
    localStorage.setItem('currentPantry', JSON.stringify(pantryData));
 
-  useNavigate("/specificPantry");
+  navigate("/specificPantry");
   };
 
   return (
