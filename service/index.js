@@ -68,13 +68,14 @@ apiRouter.post('/auth/create', async (req, res) => {
  // get pantrys
  apiRouter.get('/pantry', async (req, res) => {
    const token = req.cookies[authCookieName];
-   const user = [...userData.values()].find(u => u.token === token);
- 
+   const user = await DB.getUserByToken(token);
    if (!user) {
      return res.status(401).send({ msg: 'Unauthorized' });
    }
  
-   const userPantries = pantrys.get(user.email) || [];
+   const userPantries = await DB.pantryCollection
+   .find({ members: user.email})
+   .toArray();
    res.send({ pantrys: userPantries });
  });
 
