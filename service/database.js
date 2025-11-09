@@ -40,6 +40,7 @@ async function addPantry(pantry) {
 }
 
  module.exports = {
+   pantryCollection,
    getUser,
    getUserByToken,
    addUser,
