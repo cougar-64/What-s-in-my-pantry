@@ -168,6 +168,15 @@ apiRouter.put('/pantry/:id', (req, res) => {
    }
  });
 
+ async function findUser(field, value) {
+  if (!value) return null;
+
+  if (field === 'token') {
+    return DB.getUserByToken(value);
+  }
+  return DB.getUser(value);
+}
+
 
 app.listen(port, () => {
    console.log(`Listening on port ${port}`);
