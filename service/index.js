@@ -5,6 +5,7 @@ const uuid = require('uuid');
 const app = express();
 const cors = require('cors');
 const DB = require('./database.js');
+console.log("index.js hit")
 
 app.use(cors({
    origin: 'https://startup.byu260.click',
