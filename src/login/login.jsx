@@ -5,7 +5,6 @@ export function Login({ setUser }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
-  const DB = require('/service/database');
 
   async function createUser() {
     const response = await fetch('https://startup.byu260.click/api/auth/create', {

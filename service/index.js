@@ -112,6 +112,16 @@ apiRouter.put('/pantry/:id', (req, res) => {
    res.send({ pantries: userPantries });
  });
 
+ apiRouter.get('/auth/currentMe', async (req, res) => {
+  const token = req.cookies[authCookieName];
+  if (!token) return res.status(401).send({ msg: 'Unauthorized' });
+
+  const user = await findUser('token', token);
+  if (!user) return res.status(401).send({ msg: 'Unauthorized' });
+
+  res.send(user);
+});
+
 
  async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);

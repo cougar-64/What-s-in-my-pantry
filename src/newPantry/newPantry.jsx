@@ -6,10 +6,17 @@ export function NewPantry() {
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    const storedUser = localStorage.getItem('user');
-    if (storedUser) {
-      setUser(JSON.parse(storedUser));
+    async function fetchUser() {
+      try {
+        const res = await fetch('/auth/currentMe', { credentials: 'include' });
+        if (!res.ok) throw new Error('Unauthorized');
+        const user = await res.json();
+        setUser(user);
+      } catch (err) {
+        setUser(null);
+      }
     }
+    fetchUser();
   }, []);
 
   const handleSubmit = async (event) => {
@@ -46,8 +53,8 @@ export function NewPantry() {
 
    const updatedUser = { ...user, pantrys: data.pantrys };
    setUser(updatedUser);
-   localStorage.setItem('user', JSON.stringify(updatedUser));
-   localStorage.setItem('currentPantry', JSON.stringify(pantryData));
+  //  localStorage.setItem('user', JSON.stringify(updatedUser));
+  //  localStorage.setItem('currentPantry', JSON.stringify(pantryData));
 
   navigate("/specificPantry");
   };
