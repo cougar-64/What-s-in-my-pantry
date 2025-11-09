@@ -51,8 +51,7 @@ apiRouter.post('/auth/create', async (req, res) => {
      }
    }
    res.status(401).send({ msg: 'Unauthorized' });
- });
-
+ }); 
  // logout the user
  apiRouter.delete('/auth/logout', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
@@ -95,22 +94,26 @@ apiRouter.post('/auth/create', async (req, res) => {
 
 
  // Update a pantry
-apiRouter.put('/pantry/:id', (req, res) => {
-   const token = req.cookies[authCookieName];
-   const user = [...userData.values()].find(u => u.token === token);
+ apiRouter.put('/pantry/:id', async (req, res) => {
+  const token = req.cookies[authCookieName];
+  const user = await DB.getUserByToken(token);
  
-   if (!user) return res.status(401).send({ msg: "Unauthorized" });
- 
-   const userPantries = pantrys.get(user.email) || [];
-   const pantryIndex = userPantries.findIndex(p => p.ID === parseInt(req.params.id));
- 
-   if (pantryIndex === -1) return res.status(404).send({ msg: "Pantry not found" });
- 
-   userPantries[pantryIndex] = req.body;
-   pantrys.set(user.email, userPantries);
- 
-   res.send({ pantries: userPantries });
- });
+  if (!user) return res.status(401).send({ msg: "Unauthorized" });
+
+  const pantryId = parseInt(req.params.id);
+
+  const result = await DB.pantryCollection.updateOne(
+    { ID: pantryId, members: user.email },
+    { $set: req.body }
+  );
+
+  if (result.matchedCount === 0) {
+    return res.status(404).send({ msg: "Pantry not found" });
+  }
+
+  const updatedPantry = await DB.pantryCollection.findOne({ ID: pantryId });
+  res.send({ pantry: updatedPantry });
+});
 
  apiRouter.get('/auth/currentMe', async (req, res) => {
   const token = req.cookies[authCookieName];

@@ -7,89 +7,71 @@ export function SpecificPantry() {
    const [newQuantity, setnewQuantity] = React.useState('');
    const [user, setUser] = React.useState('');
    React.useEffect(() => {
-      const storedPantry = localStorage.getItem('currentPantry');
-      const user = localStorage.getItem('user');
-      if (user)
-         setUser(JSON.parse(user));
-      if (storedPantry)
-         setCurrentPantry(JSON.parse(storedPantry));
-}, []);
-function addItem() {
-   const updatedItems = [
-     ...currentPantry.items,
-     { name: newItem, quantity: newQuantity }
-   ];
-   const updatedPantry = { ...currentPantry, items: updatedItems };
-   setCurrentPantry(updatedPantry);
- 
-   const updatedUserPantrys = user.pantrys.map(p =>
-     p.ID === updatedPantry.ID ? updatedPantry : p
-   );
-   const updatedUser = { ...user, pantrys: updatedUserPantrys };
-   setUser(updatedUser);
- 
-   localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
-   localStorage.setItem('user', JSON.stringify(updatedUser));
- 
-   updateBackend(updatedPantry);
- }
-
- function increaseItem(index) {
-   const updatedItems = [...currentPantry.items];
-   updatedItems[index].quantity = Number(updatedItems[index].quantity) + 1;
-   const updatedPantry = { ...currentPantry, items: updatedItems };
-   setCurrentPantry(updatedPantry);
- 
-   const updatedUser = {
-     ...user,
-     pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
-   };
-   setUser(updatedUser);
- 
-   localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
-   localStorage.setItem('user', JSON.stringify(updatedUser));
- 
-   updateBackend(updatedPantry);
-
- }
- 
- function decreaseItem(index) {
-   const updatedItems = [...currentPantry.items];
- 
-   if (updatedItems[index].quantity > 1) {
-     updatedItems[index].quantity = Number(updatedItems[index].quantity) - 1;
-   } else {
-     updatedItems.splice(index, 1);
-   }
- 
-   const updatedPantry = { ...currentPantry, items: updatedItems };
-   setCurrentPantry(updatedPantry);
- 
-   const updatedUser = {
-     ...user,
-     pantrys: user.pantrys.map(p => p.ID === updatedPantry.ID ? updatedPantry : p)
-   };
-   setUser(updatedUser);
- 
-   localStorage.setItem('currentPantry', JSON.stringify(updatedPantry));
-   localStorage.setItem('user', JSON.stringify(updatedUser));
- 
-   updateBackend(updatedPantry);
- }
-
-   async function updateBackend(updatedPantry) {
-      try {
-        const res = await fetch(`/api/pantry/${updatedPantry.ID}`, {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include', // send cookies
-          body: JSON.stringify(updatedPantry),
-        });
-        if (!res.ok) console.warn("Failed to update pantry");
-      } catch (err) {
-        console.error(err);
-      }
+    async function loadPantry() {
+      const userRes = await fetch('/api/auth/currentMe', { credentials: 'include' });
+      if (!userRes.ok) return setUser(null);
+      const userData = await userRes.json();
+      setUser(userData);
+  
+      const pantryRes = await fetch('/api/pantry', { credentials: 'include' });
+      if (!pantryRes.ok) return;
+  
+      const { pantrys } = await pantryRes.json();
+      const pantry = pantrys.find(p => p.ID === JSON.parse(localStorage.getItem('currentPantry'))?.ID);
+      if (pantry) setCurrentPantry(pantry);
     }
+    loadPantry();
+  }, []);
+
+
+function addItem() {
+  const updatedItems = [...currentPantry.items, { name: newItem, quantity: Number(newQuantity) }];
+  updatePantry(updatedItems);
+}
+
+function increaseItem(index) {
+  const updatedItems = [...currentPantry.items];
+  updatedItems[index].quantity += 1;
+  updatePantry(updatedItems);
+}
+
+function decreaseItem(index) {
+  const updatedItems = [...currentPantry.items];
+  if (updatedItems[index].quantity > 1) {
+    updatedItems[index].quantity -= 1;
+  } else {
+    updatedItems.splice(index, 1);
+  }
+  updatePantry(updatedItems);
+}
+
+
+async function updatePantry(updatedItems) {
+  const updatedPantry = { ...currentPantry, items: updatedItems };
+
+  try {
+    const res = await fetch(`/api/pantry/${updatedPantry.ID}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify(updatedPantry),
+    });
+    if (!res.ok) throw new Error('Failed to update pantry');
+
+    const { pantry } = await res.json();
+    setCurrentPantry(pantry);
+
+    const updatedUser = {
+      ...user,
+      pantrys: user.pantrys.map(p => p.ID === pantry.ID ? pantry : p)
+    };
+    setUser(updatedUser);
+
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 
    function removeUser() {
       localStorage.removeItem('user');
