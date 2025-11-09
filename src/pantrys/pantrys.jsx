@@ -8,10 +8,10 @@ export function Pantrys() {
 
   React.useEffect(() => {
     async function loadUser() {
-      const storedUser = localStorage.getItem('user');
+      const storedUser = await fetch('/api/auth/currentMe', {credentials: 'include'});
       if (!storedUser) return setLoading(false);
 
-      const parsedUser = JSON.parse(storedUser);
+      const parsedUser = await res.json();
       setUser(parsedUser);
 
       try {
@@ -24,7 +24,7 @@ export function Pantrys() {
           const data = await res.json();
           const updatedUser = { ...parsedUser, pantrys: data.pantrys || [] };
           setUser(updatedUser);
-          localStorage.setItem('user', JSON.stringify(updatedUser));
+          // localStorage.setItem('user', JSON.stringify(updatedUser));
         } else {
           console.warn('Failed to load pantries');
         }
@@ -46,11 +46,11 @@ export function Pantrys() {
 
   async function removeUser() {
     await fetch('/api/auth/logout', {
-      method: 'POST',
+      method: 'DELETE',
       credentials: 'include',
     });
 
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
     setUser(null);
     window.location.href = '/';
   }
