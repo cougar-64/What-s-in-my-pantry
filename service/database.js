@@ -5,6 +5,7 @@ const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostna
 const client = new MongoClient(url);
 const db = client.db('startup');
 const userCollection = db.collection('user');
+const pantryCollection = db.collection('pantry');
 
 // This will asynchronously test the connection and exit the process if it fails
 (async function testConnection() {
@@ -34,10 +35,14 @@ function getUserByToken(token) {
    await userCollection.updateOne({ email: user.email }, { $set: user });
 }
 
+async function addPantry(pantry) {
+   await pantryCollection.insertOne(pantry);
+}
 
  module.exports = {
    getUser,
    getUserByToken,
    addUser,
-   updateUser
+   updateUser,
+   addPantry,
  }
