@@ -4,6 +4,7 @@ const express = require('express');
 const uuid = require('uuid');
 const app = express();
 const cors = require('cors');
+const DB = require('./database.js');
 
 app.use(cors({
    origin: 'https://startup.byu260.click',
@@ -13,9 +14,6 @@ app.use(cors({
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
 app.use(express.static('public'));
 const authCookieName = 'token';
-
-let userData = new Map();
-let pantrys = new Map();
 
 // JSON body parsing using built-in middleware
 app.use(express.json());
@@ -35,7 +33,6 @@ apiRouter.post('/auth/create', async (req, res) => {
      res.status(409).send({ msg: 'Existing user' });
    } else {
      const user = await createUser(req.body.email, req.body.password);
- 
      setAuthCookie(res, user.token);
      res.send({ email: user.email });
    }
@@ -47,6 +44,7 @@ apiRouter.post('/auth/create', async (req, res) => {
    if (user) {
      if (await bcrypt.compare(req.body.password, user.password)) {
        user.token = uuid.v4();
+       await DB.updateUser(user);
        setAuthCookie(res, user.token);
        res.send({ email: user.email });
        return;
@@ -123,26 +121,26 @@ apiRouter.put('/pantry/:id', (req, res) => {
 
 
  async function createUser(email, password) {
-   const passwordHash = await bcrypt.hash(password, 10);
- 
-   const user = {
-     email: email,
-     password: passwordHash,
-     token: uuid.v4(),
-   };
-   userData.set(email, user);
-   pantrys.set(email, []);
- 
-   return user;
- }
+  const passwordHash = await bcrypt.hash(password, 10);
 
+  const user = {
+    email: email,
+    password: passwordHash,
+    token: uuid.v4(),
+  };
+  await DB.addUser(user);
 
- async function findUser(field, value) {
-   if (field === 'email') {
-      return userData.get(value) || null;
-   }
-   return null;
- }
+  return user;
+}
+
+async function findUser(field, value) {
+  if (!value) return null;
+
+  if (field === 'token') {
+    return DB.getUserByToken(value);
+  }
+  return DB.getUser(value);
+}
 
  function setAuthCookie(res, authToken) {
    res.cookie('token', authToken, {
@@ -167,15 +165,6 @@ apiRouter.put('/pantry/:id', (req, res) => {
      res.status(500).send({ msg: 'Internal server error' });
    }
  });
-
- async function findUser(field, value) {
-  if (!value) return null;
-
-  if (field === 'token') {
-    return DB.getUserByToken(value);
-  }
-  return DB.getUser(value);
-}
 
 
 app.listen(port, () => {

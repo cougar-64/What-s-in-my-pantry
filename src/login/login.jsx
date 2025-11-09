@@ -5,6 +5,7 @@ export function Login({ setUser }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
+  const DB = require('/service/database');
 
   async function createUser() {
     const response = await fetch('https://startup.byu260.click/api/auth/create', {
@@ -21,7 +22,7 @@ export function Login({ setUser }) {
     }
 
     const userData = await response.json();
-    localStorage.setItem('user', JSON.stringify(userData));
+    // localStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
     navigate('/pantrys');
   }
@@ -42,7 +43,7 @@ export function Login({ setUser }) {
  
    const userData = await response.json();
    setUser(userData);
-   localStorage.setItem('user', JSON.stringify(userData));
+  //  localStorage.setItem('user', JSON.stringify(userData));
  
    // Fetch pantries for this user
    const pantryResponse = await fetch('https://startup.byu260.click/api/pantry', {
@@ -54,7 +55,7 @@ export function Login({ setUser }) {
      const pantryData = await pantryResponse.json();
      const updatedUser = { ...userData, pantries: pantryData.pantrys };
      setUser(updatedUser);
-     localStorage.setItem('user', JSON.stringify(updatedUser));
+    //  localStorage.setItem('user', JSON.stringify(updatedUser));
    } else {
      console.warn('Failed to load pantries');
    }

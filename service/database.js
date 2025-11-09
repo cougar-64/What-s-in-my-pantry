@@ -35,7 +35,6 @@ function getUserByToken(token) {
 }
 
 
-
  module.exports = {
    getUser,
    getUserByToken,
