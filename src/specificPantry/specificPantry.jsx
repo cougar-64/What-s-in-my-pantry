@@ -8,12 +8,12 @@ export function SpecificPantry() {
    const [user, setUser] = React.useState('');
    React.useEffect(() => {
     async function loadPantry() {
-      const userRes = await fetch('/api/auth/currentMe', { credentials: 'include' });
+      const userRes = await fetch('https://startup.byu260.click/api/auth/currentMe', { credentials: 'include' });
       if (!userRes.ok) return setUser(null);
       const userData = await userRes.json();
       setUser(userData);
   
-      const pantryRes = await fetch('/api/pantry', { credentials: 'include' });
+      const pantryRes = await fetch('https://startup.byu260.click/api/pantry', { credentials: 'include' });
       if (!pantryRes.ok) return;
   
       const { pantrys } = await pantryRes.json();
@@ -50,7 +50,7 @@ async function updatePantry(updatedItems) {
   const updatedPantry = { ...currentPantry, items: updatedItems };
 
   try {
-    const res = await fetch(`/api/pantry/${updatedPantry.ID}`, {
+    const res = await fetch(`https://startup.byu260.click/api/pantry/${updatedPantry.ID}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',

@@ -8,7 +8,7 @@ export function Pantrys() {
 
   React.useEffect(() => {
     async function loadUser() {
-      const storedUser = await fetch('/api/auth/currentMe', {credentials: 'include'});
+      const storedUser = await fetch('https://startup.byu260.click/api/auth/currentMe', {credentials: 'include'});
       if (!storedUser) return setLoading(false);
 
       const parsedUser = await res.json();
@@ -41,11 +41,11 @@ export function Pantrys() {
   const activePantrys = user?.pantrys || [];
 
   async function removePantry() {
-    await fetch('/api/newPantry')
+    await fetch('https://startup.byu260.click/api/newPantry')
   }
 
   async function removeUser() {
-    await fetch('/api/auth/logout', {
+    await fetch('https://startup.byu260.click/api/auth/logout', {
       method: 'DELETE',
       credentials: 'include',
     });
