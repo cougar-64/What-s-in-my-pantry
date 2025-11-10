@@ -11,11 +11,11 @@ export function Pantrys() {
       const storedUser = await fetch('https://startup.byu260.click/api/auth/currentMe', {credentials: 'include'});
       if (!storedUser) return setLoading(false);
 
-      const parsedUser = await res.json();
+      const parsedUser = await storedUser.json();
       setUser(parsedUser);
 
       try {
-        const res = await fetch('/api/pantry', {
+        const res = await fetch('https://startup.byu260.click/api/pantry', {
           method: 'GET',
           credentials: 'include',
         });
