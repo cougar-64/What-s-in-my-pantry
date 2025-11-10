@@ -8,7 +8,7 @@ export function NewPantry() {
   React.useEffect(() => {
     async function fetchUser() {
       try {
-        const res = await fetch('https://startup.byu260.click/auth/currentMe', { credentials: 'include' });
+        const res = await fetch('https://startup.byu260.click/api/auth/currentMe', { credentials: 'include' });
         if (!res.ok) throw new Error('Unauthorized');
         const user = await res.json();
         setUser(user);
