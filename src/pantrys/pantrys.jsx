@@ -74,9 +74,7 @@ export function Pantrys() {
           {activePantrys.map((p) => (
             <li key={p.ID}>
               <NavLink
-                to="/specificPantry"
-                onClick={() => localStorage.setItem('currentPantry', JSON.stringify(p))}
-              >
+                to={`/specificPantry/${p.ID}`}>
                 {p.name}
               </NavLink>
             </li>
