@@ -116,6 +116,20 @@ apiRouter.post('/auth/create', async (req, res) => {
   res.send({ pantry: updatedPantry });
 });
 
+
+  apiRouter.get('/pantry/:id', async (req, res) => {
+    const token = req.cookies[authCookieName];
+    const user = await DB.getUserByToken(token);
+
+    const pantryId = parseInt(req.params.id);
+    const pantry = await DB.pantryCollection.findOne({
+      ID: pantryId,
+      members: user.email,
+    });
+    res.send({ pantry });
+  })
+
+
  apiRouter.get('/auth/currentMe', async (req, res) => {
   const token = req.cookies[authCookieName];
   if (!token) return res.status(401).send({ msg: 'Unauthorized' });

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
 export function SpecificPantry() {
+  const { id } = useParams();
    const [currentPantry, setCurrentPantry] = React.useState(null);
    const [newItem, setNewItem] = React.useState('');
    const [newQuantity, setnewQuantity] = React.useState('');
@@ -12,16 +13,16 @@ export function SpecificPantry() {
       if (!userRes.ok) return setUser(null);
       const userData = await userRes.json();
       setUser(userData);
-  
-      const pantryRes = await fetch('https://startup.byu260.click/api/pantry', { credentials: 'include' });
+
+      const pantryRes = await fetch(`https://startup.byu260.click/api/pantry/${id}`, { credentials: 'include' });
       if (!pantryRes.ok) return;
-  
-      const { pantrys } = await pantryRes.json();
-      const pantry = pantrys.find(p => p.ID === JSON.parse(localStorage.getItem('currentPantry'))?.ID);
-      if (pantry) setCurrentPantry(pantry);
+
+      const { pantry } = await pantryRes.json();
+      setCurrentPantry(pantry);
+
     }
     loadPantry();
-  }, []);
+  }, [id]);
 
 
 function addItem() {
