@@ -16,7 +16,7 @@ export function SpecificPantry() {
       setUser(userData);
 
       const pantryRes = await fetch(`https://startup.byu260.click/api/pantry/${id}`, { credentials: 'include' });
-      console.log("pantry status:", pantryRes.status());
+      console.log("pantry status:", pantryRes.status);
       if (!pantryRes.ok) return;
 
       const { pantry } = await pantryRes.json();
