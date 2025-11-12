@@ -3,7 +3,7 @@ import { NavLink, useParams } from 'react-router-dom';
 
 export function SpecificPantry() {
   const { id } = useParams();
-  console.log({ id });
+  // console.log({ id });
    const [currentPantry, setCurrentPantry] = React.useState(null);
    const [newItem, setNewItem] = React.useState('');
    const [newQuantity, setnewQuantity] = React.useState('');
@@ -16,11 +16,11 @@ export function SpecificPantry() {
       setUser(userData);
 
       const pantryRes = await fetch(`https://startup.byu260.click/api/pantry/${id}`, { credentials: 'include' });
-      console.log("pantry status:", pantryRes.status);
+      // console.log("pantry status:", pantryRes.status);
       if (!pantryRes.ok) return;
 
       const pantryData = await pantryRes.json();
-      console.log("pantryData:", pantryData);
+      // console.log("pantryData:", pantryData);
       setCurrentPantry(pantryData.pantry);
 
     }
@@ -58,7 +58,7 @@ async function updatePantry(updatedItems) {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify(updatedPantry),
+      body: JSON.stringify({ items: updatedItems }),
     });
     if (!res.ok) throw new Error('Failed to update pantry');
 
