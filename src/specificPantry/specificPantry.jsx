@@ -67,7 +67,7 @@ async function updatePantry(updatedItems) {
 
     const updatedUser = {
       ...user,
-      pantrys: user.pantrys.map(p => p.ID === pantry.ID ? pantry : p)
+      pantrys: (user.pantrys || []).map(p => p.ID === pantry.ID ? pantry : p)
     };
     setUser(updatedUser);
 
