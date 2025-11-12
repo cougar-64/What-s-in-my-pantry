@@ -40,7 +40,7 @@ export default function App() {
          <Route path='/feedback' element={<Feedback />} />
          <Route path='/newPantry' element={<NewPantry />} />
          <Route path='/pantrys' element={<Pantrys />} />
-         <Route path='/specificPantry' element={<SpecificPantry />} />
+         <Route path='/specificPantry/:id' element={<SpecificPantry />} />
          <Route path='*' element={<NotFound />} />
       </Routes>
 

@@ -56,7 +56,7 @@ export function NewPantry() {
   //  localStorage.setItem('user', JSON.stringify(updatedUser));
   //  localStorage.setItem('currentPantry', JSON.stringify(pantryData));
 
-  navigate("/specificPantry");
+  navigate(`/specificPantry/${uniqueID}`);
   };
 
   return (

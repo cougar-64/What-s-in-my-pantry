@@ -77,8 +77,8 @@ async function updatePantry(updatedItems) {
 }
 
 
-   function removeUser() {
-      localStorage.removeItem('user');
+   async function removeUser() {
+      await fetch('https://startup.byu260.click/api/auth/logout', { credentials: 'include' });
       setUser(null);
       window.location.href = '/';
    }
