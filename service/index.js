@@ -128,7 +128,7 @@ apiRouter.post('/auth/create', async (req, res) => {
       members: user.email,
     });
     res.send({ pantry });
-  })
+  });
 
 
  apiRouter.get('/auth/currentMe', async (req, res) => {

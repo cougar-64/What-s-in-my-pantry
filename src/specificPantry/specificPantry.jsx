@@ -3,7 +3,7 @@ import { NavLink, useParams } from 'react-router-dom';
 
 export function SpecificPantry() {
   const { id } = useParams();
-  console.log(id);
+  console.log({ id });
    const [currentPantry, setCurrentPantry] = React.useState(null);
    const [newItem, setNewItem] = React.useState('');
    const [newQuantity, setnewQuantity] = React.useState('');
@@ -19,8 +19,9 @@ export function SpecificPantry() {
       console.log("pantry status:", pantryRes.status);
       if (!pantryRes.ok) return;
 
-      const { pantry } = await pantryRes.json();
-      setCurrentPantry(pantry);
+      const pantryData = await pantryRes.json();
+      console.log("pantryData:", pantryData);
+      setCurrentPantry(pantryData.pantry);
 
     }
     loadPantry();
