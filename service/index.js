@@ -8,8 +8,8 @@ const DB = require('./database.js');
 console.log("index.js hit")
 
 app.use(cors({
-  //  origin: 'https://startup.byu260.click', // deployment
-  origin: 'localhost:4000', // local testing
+   origin: 'https://startup.byu260.click', // deployment
+  // origin: 'localhost:4000', // local testing
    credentials: true
  }));
 
