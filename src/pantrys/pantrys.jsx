@@ -5,6 +5,12 @@ import './pantrys.css';
 export function Pantrys() {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [notifications, setNotifications] = React.useState([]);
+
+  function addNotification(msg) {
+    setNotifications((prev) => [...prev, msg]);
+  }
+  
 
   React.useEffect(() => {
     async function loadUser() {
@@ -38,6 +44,30 @@ export function Pantrys() {
     loadUser();
   }, []);
 
+  React.useEffect(() => {
+    if (!user) return; // wait until user is loaded
+  
+    const socket = new WebSocket("wss://startup.byu260.click/ws");
+  
+    socket.onopen = () => {
+      console.log("WebSocket connected");
+    };
+  
+    socket.onmessage = (event) => {
+      const msg = JSON.parse(event.data);
+  
+      // Example: { from, type, value }
+      addNotification(msg.value); 
+    };
+  
+    socket.onclose = () => {
+      console.log("WebSocket closed");
+    };
+  
+    return () => socket.close();
+  }, [user]);
+  
+
   const activePantrys = user?.pantrys || [];
 
   async function removePantry() {
@@ -61,11 +91,14 @@ export function Pantrys() {
     <main>
       <h1 className="users">User: {user?.email}</h1>
 
-      <ul className="notification">
-        <li className="player-name">Websocket Notification - Johnny created a new pantry</li>
-        <li className="player-name">Websocket Notification - Lisa joined 'Work' pantry</li>
-        <li className="player-name">Websocket Notification - Wifey subtracted pasta from 'Home' pantry</li>
-      </ul>
+      <div id="notifications">
+        {notifications.map((n, i) => (
+      <div key={i} className="notification">
+         {n}
+      </div>
+      ))}
+    </div>
+
 
       <br />
       <h1>Active pantrys:</h1>
