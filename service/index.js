@@ -40,6 +40,8 @@ apiRouter.post('/auth/create', async (req, res) => {
      setAuthCookie(res, user.token);
      res.send({ email: user.email });
    }
+
+   GameNotifier.broadcastEvent(user.email, GameEvent.join, `${user.email} has joined`);
  });
  
  // GetAuth login an existing user
@@ -55,6 +57,8 @@ apiRouter.post('/auth/create', async (req, res) => {
      }
    }
    res.status(401).send({ msg: 'Unauthorized' });
+
+   GameNotifier.broadcastEvent(user.email, GameEvent.join, `${user.email} has joined`);
  }); 
 
  // logout the user
@@ -67,7 +71,7 @@ apiRouter.post('/auth/create', async (req, res) => {
   res.clearCookie(authCookieName);
   res.status(204).end();
   
-  GameNotifier.broadcastEvent(user.email, )
+  GameNotifier.broadcastEvent(user.email, GameEvent.leave, `${user.email} has left`);
 });
 
 
@@ -120,6 +124,8 @@ apiRouter.post('/auth/create', async (req, res) => {
 
   const updatedPantry = await DB.pantryCollection.findOne({ ID: pantryId });
   res.send({ pantry: updatedPantry });
+
+  GameNotifier.broadcastEvent(user.email, GameEvent.modify, `${user.email} has modified a pantry`);
 });
 
 

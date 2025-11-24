@@ -2,10 +2,8 @@ const GameEvent = {
    System: 'system',
    join: 'joinPantry',
    leave: 'leavePantry',
-   addItem: 'addItem',
-   addQ: 'addQuantity',
-   subQ: 'subtractQuantity',
-   
+   modify: 'modifyPantry',
+
  };
  
  class EventMessage {
