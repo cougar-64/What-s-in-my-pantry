@@ -6,6 +6,8 @@ const app = express();
 const cors = require('cors');
 const DB = require('./database.js');
 console.log("index.js hit")
+const { webSocket } = require('./webSocket.js');
+import { GameEvent, GameNotifier } from '../public/notifier.js';
 
 app.use(cors({
    origin: 'https://startup.byu260.click', // deployment
@@ -54,6 +56,7 @@ apiRouter.post('/auth/create', async (req, res) => {
    }
    res.status(401).send({ msg: 'Unauthorized' });
  }); 
+
  // logout the user
  apiRouter.delete('/auth/logout', async (req, res) => {
   const user = await findUser('token', req.cookies[authCookieName]);
@@ -63,6 +66,8 @@ apiRouter.post('/auth/create', async (req, res) => {
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
+  
+  GameNotifier.broadcastEvent(user.email, )
 });
 
 
@@ -189,6 +194,8 @@ async function findUser(field, value) {
  });
 
 
-app.listen(port, () => {
+const httpService = app.listen(port, () => {
    console.log(`Listening on port ${port}`);
  })
+
+ webSocket(httpService);
