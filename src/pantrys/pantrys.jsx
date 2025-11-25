@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './pantrys.css';
+import { GameNotifier, GameEvent } from '../public/notifier.js';
 
 export function Pantrys() {
   const [user, setUser] = React.useState(null);
@@ -45,27 +46,19 @@ export function Pantrys() {
   }, []);
 
   React.useEffect(() => {
-    if (!user) return; // wait until user is loaded
+    if (!user) return;
   
-    const socket = new WebSocket("wss://startup.byu260.click/ws");
+    function handleEvent(event) {
+      if (event.type === GameEvent.join || event.type === GameEvent.leave || event.type === GameEvent.modify) {
+        addNotification(event.value);
+      }
+    }
   
-    socket.onopen = () => {
-      console.log("WebSocket connected");
-    };
+    GameNotifier.addHandler(handleEvent);
   
-    socket.onmessage = (event) => {
-      const msg = JSON.parse(event.data);
-  
-      // Example: { from, type, value }
-      addNotification(msg.value); 
-    };
-  
-    socket.onclose = () => {
-      console.log("WebSocket closed");
-    };
-  
-    return () => socket.close();
+    return () => GameNotifier.removeHandler(handleEvent);
   }, [user]);
+  
   
 
   const activePantrys = user?.pantrys || [];

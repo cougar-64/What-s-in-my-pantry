@@ -7,7 +7,7 @@ const cors = require('cors');
 const DB = require('./database.js');
 console.log("index.js hit")
 const { webSocket } = require('./webSocket.js');
-import { GameEvent, GameNotifier } from '../public/notifier.js';
+const { GameEvent, ServerNotifier } = require('./serverNotifier.js');
 
 app.use(cors({
    origin: 'https://startup.byu260.click', // deployment
@@ -28,6 +28,13 @@ app.use(cookieParser());
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
+const httpService = app.listen(port, () => {
+  console.log(`Listening on port ${port}`);
+})
+
+const wss = webSocket(httpService);
+const GameNotifier = new ServerNotifier(wss);
+
 // Router for service endpoints
 var apiRouter = express.Router();
 app.use(`/api`, apiRouter);
@@ -39,9 +46,8 @@ apiRouter.post('/auth/create', async (req, res) => {
      const user = await createUser(req.body.email, req.body.password);
      setAuthCookie(res, user.token);
      res.send({ email: user.email });
+     GameNotifier.broadcastEvent(user.email, GameEvent.join, `${user.email} has joined`);
    }
-
-   GameNotifier.broadcastEvent(user.email, GameEvent.join, `${user.email} has joined`);
  });
  
  // GetAuth login an existing user
@@ -53,12 +59,11 @@ apiRouter.post('/auth/create', async (req, res) => {
        await DB.updateUser(user);
        setAuthCookie(res, user.token);
        res.send({ email: user.email });
+       GameNotifier.broadcastEvent(user.email, GameEvent.join, `${user.email} has joined`);
        return;
      }
    }
    res.status(401).send({ msg: 'Unauthorized' });
-
-   GameNotifier.broadcastEvent(user.email, GameEvent.join, `${user.email} has joined`);
  }); 
 
  // logout the user
@@ -67,11 +72,11 @@ apiRouter.post('/auth/create', async (req, res) => {
   if (user) {
     delete user.token;
     DB.updateUser(user);
+    GameNotifier.broadcastEvent(user.email, GameEvent.leave, `${user.email} has left`);
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
-  
-  GameNotifier.broadcastEvent(user.email, GameEvent.leave, `${user.email} has left`);
+
 });
 
 
@@ -198,10 +203,3 @@ async function findUser(field, value) {
      res.status(500).send({ msg: 'Internal server error' });
    }
  });
-
-
-const httpService = app.listen(port, () => {
-   console.log(`Listening on port ${port}`);
- })
-
- webSocket(httpService);
