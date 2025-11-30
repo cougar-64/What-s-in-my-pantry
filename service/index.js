@@ -10,6 +10,7 @@ const { webSocket } = require('./webSocket.js');
 const { GameEvent, ServerNotifier } = require('./serverNotifier.js');
 const fetch = (...args) =>
   import('node-fetch').then(({ default: fetch }) => fetch(...args));
+const path = require('path')
 
 app.use(cors({
    origin: 'https://startup.byu260.click', // deployment
