@@ -8,6 +8,7 @@ import { Feedback } from './feedback/feedback';
 import { Pantrys } from './pantrys/pantrys';
 import { NewPantry } from './newPantry/newPantry';
 import { SpecificPantry } from './specificPantry/specificPantry';
+import { GameNotifier } from '../public/notifier.js'
 
 export default function App() {
    const [user, setUser] = React.useState('');
@@ -17,6 +18,12 @@ export default function App() {
          setUser(user);
       else
          setUser(null);
+
+      GameNotifier.connect('wss://startup.byu260.click/ws');
+
+      return() => {
+         GameNotifier.disconnect();
+      }
    }, [])
    return (
    <BrowserRouter>
