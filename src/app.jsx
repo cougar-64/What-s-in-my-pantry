@@ -18,12 +18,6 @@ export default function App() {
          setUser(user);
       else
          setUser(null);
-
-      GameNotifier.connect('wss://startup.byu260.click/ws');
-
-      return() => {
-         GameNotifier.disconnect();
-      }
    }, [])
    return (
    <BrowserRouter>

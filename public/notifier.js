@@ -21,18 +21,21 @@ class GameEventNotifier {
   constructor() {
     let port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+    const host = window.location.host;
+    this.socket = new WebSocket(`${protocol}://${host}/ws`);
     this.socket.onopen = (event) => {
       this.receiveEvent(new EventMessage('Startup', GameEvent.System, { msg: 'connected' }));
     };
     this.socket.onclose = (event) => {
       this.receiveEvent(new EventMessage('Startup', GameEvent.System, { msg: 'disconnected' }));
     };
-    this.socket.onmessage = async (msg) => {
+    this.socket.onmessage = (msg) => {
       try {
-        const event = JSON.parse(await msg.data.text());
+        const event = JSON.parse(msg.data);
         this.receiveEvent(event);
-      } catch {}
+      } catch (err) {
+        console.error("WS parse error:", err, msg.data);
+      }
     };
   }
 
@@ -46,17 +49,12 @@ class GameEventNotifier {
   }
 
   removeHandler(handler) {
-    this.handlers.filter((h) => h !== handler);
+    this.handlers = this.handlers.filter((h) => h !== handler);
   }
 
   receiveEvent(event) {
     this.events.push(event);
-
-    this.events.forEach((e) => {
-      this.handlers.forEach((handler) => {
-        handler(e);
-      });
-    });
+    this.handlers.forEach((handler) => handler(event));
   }
 }
 
