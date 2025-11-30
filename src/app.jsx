@@ -8,7 +8,6 @@ import { Feedback } from './feedback/feedback';
 import { Pantrys } from './pantrys/pantrys';
 import { NewPantry } from './newPantry/newPantry';
 import { SpecificPantry } from './specificPantry/specificPantry';
-import { GameNotifier } from '../public/notifier.js'
 
 export default function App() {
    const [user, setUser] = React.useState('');
