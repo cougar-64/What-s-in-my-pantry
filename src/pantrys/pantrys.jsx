@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './pantrys.css';
-import { GameNotifier, GameEvent } from './notifier.js';
+import { GameNotifier, GameEvent } from '../notifier.js';
 
 export function Pantrys() {
   const [user, setUser] = React.useState(null);
