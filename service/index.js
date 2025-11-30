@@ -8,6 +8,8 @@ const DB = require('./database.js');
 console.log("index.js hit")
 const { webSocket } = require('./webSocket.js');
 const { GameEvent, ServerNotifier } = require('./serverNotifier.js');
+const fetch = (...args) =>
+  import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 app.use(cors({
    origin: 'https://startup.byu260.click', // deployment
@@ -184,8 +186,8 @@ async function findUser(field, value) {
    res.cookie('token', authToken, {
      maxAge: 1000 * 60 * 60 * 24,
      httpOnly: false,
-     secure: false,
-     sameSite: 'lax'
+     secure: true,
+     sameSite: 'none'
    });
  }
 
