@@ -30,7 +30,7 @@ app.use(cookieParser());
 // Serve up the front-end static content hosting
 app.use(express.static('public'));
 
-const httpService = app.listen(port, () => {
+const httpService = app.listen(port, '0.0.0.0', () => {
   console.log(`Listening on port ${port}`);
 })
 
