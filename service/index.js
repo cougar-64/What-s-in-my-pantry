@@ -105,11 +105,11 @@ apiRouter.post('/auth/create', async (req, res) => {
     return res.status(401).send({ msg: "Unauthorized" });
    }
    await DB.addPantry(req.body);
+   GameNotifier.broadcastEvent(user.email, GameEvent.new, `${user.email} has created a new pantry`);
    const userPantries = await DB.pantryCollection
    .find({ members: user.email })
    .toArray();
    res.send({pantrys: userPantries});
-   GameNotifier.broadcastEvent(user.email, GameEvent.new, `${user.email} has created a new pantry`)
  });
 
 
