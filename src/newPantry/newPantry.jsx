@@ -4,6 +4,39 @@ import { useNavigate } from 'react-router-dom';
 export function NewPantry() {
   const [user, setUser] = React.useState(null);
   const navigate = useNavigate();
+  const [notifications, setNotifications] = React.useState([]);
+
+
+
+
+  React.useEffect(() => {
+    if (!user) return;
+  
+    const ws = new WebSocket('wss://startup.byu260.click');
+  
+    ws.onopen = () => console.log('Connected to WebSocket');
+  
+    ws.onmessage = (message) => {
+      try {
+        const event = JSON.parse(message.data);
+        // Only handle join/leave/modify events
+        if (['join','leave','modify'].includes(event.type)) {
+          setNotifications((prev) => [...prev, event.value]);
+        }
+      } catch (err) {
+        console.error('Error parsing WebSocket message', err);
+      }
+    };
+  
+    ws.onclose = () => console.log('WebSocket disconnected');
+    ws.onerror = (err) => console.error('WebSocket error', err);
+  
+    return () => ws.close();
+  }, [user]);
+
+  
+
+
 
   React.useEffect(() => {
     async function fetchUser() {
@@ -63,10 +96,11 @@ export function NewPantry() {
     <main>
       <h1 className="users">User: {user?.email}</h1>
       <ul className="notification">
-        <li className="player-name">Websocket Notification - Johnny created a new pantry</li>
-        <li className="player-name">Websocket Notification - Lisa joined 'Work' pantry</li>
-        <li className="player-name">Websocket Notification - Wifey subtracted pasta from 'Home' pantry</li>
+        {notifications.map((msg, i) => (
+        <li key={i} className="player-name">{msg}</li>
+        ))}
       </ul>
+
 
       <br />
 
