@@ -3,9 +3,11 @@ const { WebSocketServer } = require('ws');
 function webSocket(httpServer) {
      // Create a websocket object
   const socketServer = new WebSocketServer({ server: httpServer });
+  console.log('user created a new websocket object!');
 
   socketServer.on('connection', (socket) => {
     socket.isAlive = true;
+    console.log('user connected!');
 
     // Forward messages to everyone except the sender
     socket.on('message', function message(data) {
@@ -31,7 +33,7 @@ function webSocket(httpServer) {
       client.ping();
     });
   }, 10000);
-
+  return socketServer;
 }
 
 module.exports = { webSocket };

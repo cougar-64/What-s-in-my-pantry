@@ -11,6 +11,39 @@ export function Pantrys() {
   function addNotification(msg) {
     setNotifications((prev) => [...prev, msg]);
   }
+
+
+  React.useEffect(() => {
+    if (!user) return;
+  
+    const ws = new WebSocket('wss://startup.byu260.click'); // production
+    // const ws = new WebSocket('wss://localhost:4000'); // local testing 
+  
+    ws.onopen = () => {
+      console.log('Connected to WebSocket');
+    };
+  
+    ws.onmessage = (message) => {
+      try {
+        const event = JSON.parse(message.data);
+        if (
+          event.type === GameEvent.join ||
+          event.type === GameEvent.leave ||
+          event.type === GameEvent.modify
+        ) {
+          addNotification(event.value);
+        }
+      } catch (err) {
+        console.error('Error parsing WebSocket message', err);
+      }
+    };
+  
+    ws.onclose = () => console.log('WebSocket disconnected');
+    ws.onerror = (err) => console.error('WebSocket error', err);
+  
+    return () => ws.close();
+  }, [user]);
+  
   
 
   React.useEffect(() => {
@@ -53,10 +86,7 @@ export function Pantrys() {
         addNotification(event.value);
       }
     }
-  
-    GameNotifier.addHandler(handleEvent);
-  
-    return () => GameNotifier.removeHandler(handleEvent);
+
   }, [user]);
   
   
