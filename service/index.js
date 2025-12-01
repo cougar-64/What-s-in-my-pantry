@@ -109,6 +109,7 @@ apiRouter.post('/auth/create', async (req, res) => {
    .find({ members: user.email })
    .toArray();
    res.send({pantrys: userPantries});
+   GameNotifier.broadcastEvent(user.email, GameEvent.new, `${user.email} has created a new pantry`)
  });
 
 

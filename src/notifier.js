@@ -3,7 +3,7 @@ const GameEvent = {
   join: 'joinPantry',
   leave: 'leavePantry',
   modify: 'modifyPantry',
-
+  new: 'newPantry',
 };
 
 class EventMessage {
