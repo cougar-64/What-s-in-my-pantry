@@ -117,8 +117,17 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [x] **Backend listens for WebSocket connection** - Backend successfully listens for connections.
+- [x] **Frontend makes WebSocket connection** - Frontend makes the connections successfully!
+- [x] **Data sent over WebSocket connection** - Data is sent successfully across websocket connections.
+- [x] **WebSocket data displayed** - Data is displayed, see line 127 for specific instructions.
+- [x] **Application is fully functional** - My application is functionable and works! So happy with the finished product.
+
+
+IMPORTANT NOTES FOR TESTING WEBSOCKET:
+You must open one browser normally and then another one in incognito (simulating someone on
+ a differnet computer entirely). Then when you log in the second user, it will display to the first user that
+ the second user has logged in. When you have created a new pantry and add/delete something, it will notify the user
+ that another user has modified a pantry. When a user logs out, it also shows that.
+ The websocket isn't perfect and doesn't hold all of the data persistently like it's supposed to, but it does more
+ or less what it's supposed to! This was such a fun project.
