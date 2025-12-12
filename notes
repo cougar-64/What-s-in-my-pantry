@@ -2,3 +2,62 @@ Notes for things I need to remember:
 My server's IP adderess: http://52.20.26.228
 Command to ssh into my server: ssh -i production.pem ubuntu@23.21.13.97
 when you type `*` in the value of the subdomain, it is a wildcard that allows any prefix to be included as a subdomain so you don't have to list them manually
+
+
+What is the default port for HTTP/HTTPS/SSH? 
+  HTTP: 80
+  HTTPS:443
+  SSH: 22
+What does an HTTP status code in the range of 300/400/500 indicate? 
+  300-399: Redirection
+  400-499: Client errors
+  500-599: Server errors
+What does the HTTP header content-type allow you to do? 
+  Tells the client what type of data is being sent
+What does a “Secure cookie”/”Http-only cookie”/”Same-site cookie” do? https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies 
+  Secure cookie: Only sent over HTTPS
+  HTTPOnly cookie: Inaccessible to javascript
+  SameSite cookie: Controls whether cookies are sent on cross-site requests
+Assuming the following Express middleware, what would be the console.log output for an HTTP GET request with a URL path of /api/document? 
+  something like GET /api/document
+Given the following Express service code: What does the following front end JavaScript that performs a fetch return? 
+Given the following MongoDB query, select all of the matching documents {name:Mark}
+  db.collection.find({ name: "Mark"})
+How should user passwords be stored? 
+  Never in plain text! Hash them 
+Assuming the following node.js websocket code in the back end, and the following front end websocket code, what will the front end log to the console? 
+What is the websocket protocol intended to provide? 
+  Persistent communication channel between client and server
+What do the following acronyms stand for? JSX, JS, AWS, NPM, NVM 
+  JSX: Javascript XML
+  JS: Javascript
+  AWS: Amazon Web Services
+  NPM: Node Package Manager
+  NVM: Node Version Manager
+Assuming an HTML document with a body element. What text content will the following React component generate? The react component will use parameters. 
+Given a set of React components that include each other, what will be generated
+What does a React component with React.useState do? 
+  Declares a state variable inside the component and causes it to re-render when the state changes
+What are React Hooks used for? 
+  Let functional components use things like state, lifecycle effects, context, ect. without writing classes for them 
+What does the State Hook/Context Hook/Ref Hook/Effect Hook/Performance Hook do? https://react.dev/reference/react/hooks 
+  State hook: stores mutatable state
+  Context hook: Access a value from a React context
+  Ref hook: Stores mutatable values that don't re-render, or reference DOM nodes
+  Effect hook: Run side effects after render
+  Performance hook: memoize expensive computations, memoize functions, smooth UI updates, etc.
+Given React Router code, select statements that are true. 
+What does the package.json file do? 
+  Defines project metadata, lists dependencies, defines scripts, specifies nodes and packages
+What does the fetch function do? 
+  performs an HTTP request to the back end server, returns a promise, provides in a stream (DOM object, text, blob, etc.)
+What does node.js do? 
+  Runs javascript outside the browser
+What does pm2 do?
+  Process manager for node apps
+  Auto restarts crashed apps
+  handles logs
+What does Vite do?
+  A fast frontend build tool
+  Uses ES solutions, instant dev server, super fast HMR
+  Builds optimized production bundles
